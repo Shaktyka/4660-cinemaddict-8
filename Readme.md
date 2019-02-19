@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Елена Петренко](https://up.htmlacademy.ru/ecmascript/8/user/4660).
-* Наставник: `Неизвестно`.
+* Наставник: [Валерия Зеленая](https://htmlacademy.ru/profile/id425717).
 
 ---
 
