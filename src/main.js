@@ -1,15 +1,15 @@
 import {renderFilter} from './render-filter.js';
-import {getRandomNumber} from './utils.js';
+import getRandomNumber from './utils.js';
 import renderCardList from './render-card-list.js';
+import {filmsMainBlock, filmsTopBlock, filmsCommentsBlock} from './variables.js';
 
 // Блок для вставки фильтра
-const filterContainer = document.querySelector(`.main-navigation`);
-
-// 3 блока для вставки карточек задач
-const filmsContainers = Array.from(document.querySelectorAll(`.films-list__container`));
+const filterBlock = document.querySelector(`.main-navigation`);
 
 // Стартовое кол-во карточек
-const cardsAmount = [7, 2, 2];
+const cardsMainNumber = 7;
+const cardsTopNumber = 2;
+const cardsCommentsNumber = 2;
 
 // Список фильтров
 const filters = [
@@ -21,22 +21,22 @@ const filters = [
 ];
 
 // Рендеринг фильтра
-const renderFilterList = (filtersArr, container) => {
+const renderFilterList = (filtersArr, block) => {
   filtersArr.forEach((filterName, i) => {
-    const first = (i === 0) ? true : null;
-    const last = (i === filtersArr.length - 1) ? true : null;
+    const first = (i === 0) ? true : false;
+    const last = (i === filtersArr.length - 1) ? true : false;
     const count = (first || last) ? 0 : getRandomNumber(1, 20);
 
     const filter = renderFilter(filterName, count, first, last);
 
-    container.appendChild(filter);
+    block.appendChild(filter);
   });
 };
 
 // Стартовый рендеринг фильтра
-renderFilterList(filters, filterContainer);
+renderFilterList(filters, filterBlock);
 
 // Стартовая отрисовка карточек в основной блок
-renderCardList(cardsAmount[0], filmsContainers[0]);
-renderCardList(cardsAmount[1], filmsContainers[1]);
-renderCardList(cardsAmount[2], filmsContainers[2]);
+renderCardList(cardsMainNumber, filmsMainBlock);
+renderCardList(cardsTopNumber, filmsTopBlock);
+renderCardList(cardsCommentsNumber, filmsCommentsBlock);
