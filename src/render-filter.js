@@ -1,3 +1,6 @@
+import { getRandomNumber } from './utils.js';
+import renderCardList from './render-card-list.js';
+
 // Блок для вставки фильтра
 const filmsContainers = Array.from(document.querySelectorAll(`.films-list__container`));
 

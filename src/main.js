@@ -1,6 +1,7 @@
 import { filterClickHandler, renderFilter } from './render-filter.js';
 import renderCard from './render-card.js';
 import { getRandomNumber, clearContainer } from './utils.js';
+import renderCardList from './render-card-list.js';
 
 // Блок для вставки фильтра
 const filterContainer = document.querySelector(`.main-navigation`);
@@ -20,24 +21,6 @@ const filters = [
   `Stats`
 ];
 
-// Обработчик клика по пункту фильтра
-// const filterClickHandler = (evt) => {
-//   evt.preventDefault();
-//   clearContainer(filterContainer);
-
-//   const clickedFilter = evt.target;
-
-//   renderFilterList(cardNumber, filmsContainers);
-// };
-
-// Обработчик клика по пункту фильтра
-const addFilterClickHandler = (element, amount) => {
-  element.addEventListener(`click`, function() {
-    emptyContainer(cardContainer);
-    renderTaskList(amount, cardContainer);
-  });
-};
-
 // Рендеринг фильтра
 const renderFilterList = (filtersArr, container) => {
   const fragment = document.createDocumentFragment();
@@ -55,20 +38,6 @@ const renderFilterList = (filtersArr, container) => {
 
 // Стартовый рендеринг фильтра
 renderFilterList(filters, filterContainer);
-
-// Отрисовка списка задач
-const renderCardList = (amount, container) => {
-  clearContainer(container);
-
-  const fragment = document.createDocumentFragment();
-
-  for (let i = 0; i < amount; i++) {
-    const card = renderCard();
-    fragment.appendChild(card);
-  }
-
-  container.appendChild(fragment);
-};
 
 // Стартовая отрисовка карточек в основной блок
 renderCardList(cardsAmount[0], filmsContainers[0]);
