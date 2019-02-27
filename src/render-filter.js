@@ -1,4 +1,4 @@
-import { getRandomNumber } from './utils.js';
+import {getRandomNumber} from './utils.js';
 import renderCardList from './render-card-list.js';
 
 // Блок для вставки фильтра
@@ -24,4 +24,4 @@ count">${taskAmount}</span>` : ``}</a>`;
   return link[0];
 };
 
-export { filterClickHandler, renderFilter };
+export {filterClickHandler, renderFilter};

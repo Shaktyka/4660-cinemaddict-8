@@ -8,4 +8,4 @@ const clearContainer = (container) => {
   container.innerHTML = ``;
 };
 
-export { getRandomNumber, clearContainer };
+export {getRandomNumber, clearContainer};

@@ -1,6 +1,5 @@
-import { filterClickHandler, renderFilter } from './render-filter.js';
-import renderCard from './render-card.js';
-import { getRandomNumber, clearContainer } from './utils.js';
+import {renderFilter} from './render-filter.js';
+import {getRandomNumber} from './utils.js';
 import renderCardList from './render-card-list.js';
 
 // Блок для вставки фильтра
@@ -23,8 +22,6 @@ const filters = [
 
 // Рендеринг фильтра
 const renderFilterList = (filtersArr, container) => {
-  const fragment = document.createDocumentFragment();
-
   filtersArr.forEach((filterName, i) => {
     const first = (i === 0) ? true : null;
     const last = (i === filtersArr.length - 1) ? true : null;
