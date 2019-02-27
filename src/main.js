@@ -1,22 +1,17 @@
-// import renderFilter from './render-filter.js';
-// import renderCard from './render-card.js';
-
+import renderFilter from './render-filter.js';
+import renderCard from './render-card.js';
 
 // Блок для вставки фильтра
 const filterContainer = document.querySelector(`.main-navigation`);
 
-
-// Блоки для вставки карточек задач
+// 3 блока для вставки карточек задач
 const filmsContainers = Array.from(document.querySelectorAll(`.films-list__container`));
-
 
 // Стартовое кол-во карточек
 const startCardNumber = 7;
 
-
 // Список фильтров
 let cardsList = null;
-
 
 // Список фильтров
 const filters = [
@@ -39,7 +34,6 @@ const clearContainer = (container) => {
   container.innerHTML = ``;
 };
 
-
 // Обработчик клика по пункту фильтра
 const filterClickHandler = (evt) => {
   evt.preventDefault();
@@ -50,25 +44,33 @@ const filterClickHandler = (evt) => {
   renderFilterList(cardNumber, filmsContainers);
 };
 
+// Обработчик клика по пункту фильтра
+const addFilterClickHandler = (element, amount) => {
+  element.addEventListener(`click`, function() {
+    emptyContainer(cardContainer);
+    renderTaskList(amount, cardContainer);
+  });
+};
 
-// Рендеринг всего фильтра
+
+// Рендеринг фильтра
 const renderFilterList = (filtersArr, container) => {
-  clearContainer(filterContainer);
-
   const fragment = document.createDocumentFragment();
 
-  // Отрисовка всех пунктов списка фильтра
-  filtersArr.forEach((filter) => {
-    const cardNumber = getRandomNumber(0, 20);
-    // Повесить обработчик клика
-  });
+  filtersArr.forEach((filterName, i) => {
+    const first = (i === 0) ? true : null;
+    const last = (i === filtersArr.length - 1) ? true : null;
+    const count = (first || last) ? 0 : getRandomNumber(0, 20);
 
-  container.appendChild(fragment);
+    const filter = renderFilter(filterName, count, first, last);
+
+    container.appendChild(filter);
+  });
 };
 
 
 // Стартовый рендеринг фильтра
-// renderFilterList(filters, filterContainer);
+renderFilterList(filters, filterContainer);
 
 
 // Отрисовка списка задач
