@@ -1,14 +1,4 @@
-import getRandomNumber from './utils.js';
-import {filmsMainBlock} from './variables.js';
-import renderCardList from './render-card-list.js';
-
-// Обработчик нажатия на пункт фильтра
-const filterClickHandler = (evt) => {
-  evt.preventDefault();
-  filmsMainBlock.innerHTML = ``;
-
-  renderCardList(getRandomNumber(1, 15), filmsMainBlock);
-};
+import filterClickHandler from './filter-click-handler.js';
 
 // Рендеринг одного фильтра
 const renderFilter = (filterName, taskAmount = 0, isActive = false, isAdditional = false) => {
@@ -22,4 +12,4 @@ const renderFilter = (filterName, taskAmount = 0, isActive = false, isAdditional
   return element;
 };
 
-export {filterClickHandler, renderFilter};
+export default renderFilter;

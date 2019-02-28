@@ -2,7 +2,7 @@ import renderCard from './render-card.js';
 
 // Отрисовка списка задач
 const renderCardList = (amount, container) => {
-  container.innerHtml = ``;
+  container.innerHTML = ``;
 
   const fragment = document.createDocumentFragment();
 

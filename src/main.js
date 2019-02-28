@@ -1,15 +1,17 @@
-import {renderFilter} from './render-filter.js';
+import renderFilter from './render-filter.js';
 import getRandomNumber from './utils.js';
 import renderCardList from './render-card-list.js';
-import {filmsMainBlock, filmsTopBlock, filmsCommentsBlock} from './variables.js';
-
-// Блок для вставки фильтра
-const filterBlock = document.querySelector(`.main-navigation`);
 
 // Стартовое кол-во карточек
 const cardsMainNumber = 7;
 const cardsTopNumber = 2;
 const cardsCommentsNumber = 2;
+
+const filterBlock = document.querySelector(`.main-navigation`);
+
+const filmsMainBlock = document.querySelector(`.films .films-list__container`);
+const filmsTopBlock = document.querySelector(`.rating-top .films-list__container`);
+const filmsCommentsBlock = document.querySelector(`.comments-top .films-list__container`);
 
 // Список фильтров
 const filters = [
