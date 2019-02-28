@@ -1,5 +1,5 @@
 import getRandomNumber from './utils.js';
-import {filmsMainBlock, filmsTopBlock, filmsCommentsBlock} from './variables.js';
+import {filmsMainBlock} from './variables.js';
 import renderCardList from './render-card-list.js';
 
 // Обработчик нажатия на пункт фильтра
