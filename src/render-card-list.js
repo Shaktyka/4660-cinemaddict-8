@@ -1,8 +1,8 @@
 import renderCard from './render-card.js';
 
 // Отрисовка списка задач
-const renderCardList = (amount, container) => {
-  container.innerHTML = ``;
+const renderCardList = (amount, block) => {
+  block.innerHTML = ``;
 
   const fragment = document.createDocumentFragment();
 
@@ -11,7 +11,7 @@ const renderCardList = (amount, container) => {
     fragment.appendChild(card);
   }
 
-  container.appendChild(fragment);
+  block.appendChild(fragment);
 };
 
 export default renderCardList;
