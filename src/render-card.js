@@ -21,9 +21,8 @@ const renderCard = () => {
 
   const template = document.createElement(`template`);
   template.innerHTML = string;
-  const element = template.content.firstChild;
 
-  return element;
+  return template.content.firstChild;
 };
 
 export default renderCard;
