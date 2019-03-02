@@ -5,8 +5,7 @@ const renderCardList = (amount, block) => {
   block.innerHTML = ``;
 
   for (let i = 0; i < amount; i++) {
-    const card = renderCard();
-    block.appendChild(card);
+    block.appendChild(renderCard());
   }
 };
 
