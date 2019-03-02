@@ -1,5 +1,7 @@
 // Рендеринг одной задачи
 const renderCard = () => {
+  // Отступы из строки пока не буду убирать, т.к. станет нечитабельно и будет очень тяжело работать.
+  // Уберу позже, когда данные вставлю.
   const string = `<article class="film-card">
     <h3 class="film-card__title">The Assassination Of Jessie James By The Coward Robert Ford</h3>
     <p class="film-card__rating">9.8</p>
@@ -11,7 +13,6 @@ const renderCard = () => {
     <img src="./images/posters/three-friends.jpg" alt="" class="film-card__poster">
     <p class="film-card__description">A priest with a haunted past and a novice on the threshold of her final vows are sent by the Vatican to investigate the death of a young nun in Romania and confront a malevolent force in the form of a demonic nun.</p>
     <button class="film-card__comments">13 comments</button>
-
     <form class="film-card__controls">
       <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist"><!--Add to watchlist--> WL</button>
       <button class="film-card__controls-item button film-card__controls-item--mark-as-watched"><!--Mark as watched-->WTCHD</button>
