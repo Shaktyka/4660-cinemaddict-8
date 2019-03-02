@@ -1,7 +1,6 @@
 // Рендеринг одной задачи
 const renderCard = () => {
-  const string = `
-  <article class="film-card">
+  const string = `<article class="film-card">
     <h3 class="film-card__title">The Assassination Of Jessie James By The Coward Robert Ford</h3>
     <p class="film-card__rating">9.8</p>
     <p class="film-card__info">
@@ -22,8 +21,9 @@ const renderCard = () => {
 
   const template = document.createElement(`template`);
   template.innerHTML = string;
+  const element = template.content.firstChild;
 
-  return template.content;
+  return element;
 };
 
 export default renderCard;
