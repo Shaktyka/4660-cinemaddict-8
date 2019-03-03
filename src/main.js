@@ -22,6 +22,9 @@ const filters = [
   `Stats`
 ];
 
+// Активный фильтр
+let activeFilter = null;
+
 // Фильтры, для которых не нужны кол-ва карточек
 const activeFilterName = `All movies`;
 const addFilterName = `Stats`;
@@ -33,7 +36,7 @@ const renderFilterList = (filtersArr, block) => {
     const isAddFilter = (filterName === addFilterName) ? true : false;
     const count = (isActiveFilter || isAddFilter) ? 0 : getRandomNumber(1, 20);
 
-    const filter = renderFilter(filterName, count, isActiveFilter, isAddFilter);
+    const filter = renderFilter(filterName, count, isActiveFilter, isAddFilter, renderCardList, filmsMainBlock);
 
     block.appendChild(filter);
   });
