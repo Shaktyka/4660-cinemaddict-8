@@ -1,4 +1,11 @@
 // Генерация случайного числа от min до max
-const getRandomNumber = (min, max) => min + Math.floor(Math.random() * (max + 1 - min));
+export const getRandomNumber = (min, max) => min + Math.floor(Math.random() * (max + 1 - min));
 
-export default getRandomNumber;
+// Генерирует элемент из строки
+const renderElement = (string) => {
+  const template = document.createElement(`template`);
+  template.innerHTML = string;
+  return template.content.firstChild;
+};
+
+export default renderElement;

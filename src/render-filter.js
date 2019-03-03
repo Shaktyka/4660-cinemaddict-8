@@ -1,9 +1,4 @@
-// Превращает строку в HTML-элемент
-const renderElement = (string) => {
-  const template = document.createElement(`template`);
-  template.innerHTML = string;
-  return template.content.firstChild;
-};
+import renderElement from './utils.js';
 
 // Рендеринг одного фильтра
 const renderFilter = (filterName, cardAmount = 0, isActive = false, isAdditional = false, cb, cardBlock) => {

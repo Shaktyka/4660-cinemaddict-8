@@ -1,5 +1,5 @@
 import renderFilter from './render-filter.js';
-import getRandomNumber from './utils.js';
+import {getRandomNumber} from './utils.js';
 import renderCardList from './render-card-list.js';
 
 // Стартовое кол-во карточек

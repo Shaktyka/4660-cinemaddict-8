@@ -1,3 +1,5 @@
+import renderElement from './utils.js';
+
 // Рендеринг одной задачи
 const renderCard = () => {
   const string = `<article class="film-card">
@@ -18,10 +20,7 @@ const renderCard = () => {
   </form>
   </article>`;
 
-  const template = document.createElement(`template`);
-  template.innerHTML = string;
-
-  return template.content;
+  return renderElement(string);
 };
 
 export default renderCard;
