@@ -5,7 +5,7 @@ export const getRandomNumber = (min, max) => min + Math.floor(Math.random() * (m
 const renderElement = (string) => {
   const template = document.createElement(`template`);
   template.innerHTML = string;
-  return template.content.firstChild;
+  return template.content;
 };
 
 export default renderElement;
