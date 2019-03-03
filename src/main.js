@@ -22,9 +22,6 @@ const filters = [
   `Stats`
 ];
 
-// Активный фильтр
-let activeFilter = null;
-
 // Фильтры, для которых не нужны кол-ва карточек
 const activeFilterName = `All movies`;
 const addFilterName = `Stats`;
