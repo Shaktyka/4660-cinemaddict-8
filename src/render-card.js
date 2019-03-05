@@ -2,13 +2,11 @@ import renderElement from './utils.js';
 
 // Рендеринг одной задачи
 const renderCard = (cardData) => {
-  const releaseYear = new Date(cardData.release.premiereDate).getFullYear();
-
   const string = `<article class="film-card ${(cardData.isControls) ? `` : `film-card--no-controls`}">
   <h3 class="film-card__title">${cardData.filmTitle.release}</h3>
   <p class="film-card__rating">${cardData.rating.average}</p>
   <p class="film-card__info">
-    <span class="film-card__year">${releaseYear}</span>
+    <span class="film-card__year">${new Date(cardData.release.premiereDate).getFullYear()}</span>
     <span class="film-card__duration">${cardData.duration}</span>
     <span class="film-card__genre">${cardData.genre}</span>
   </p>

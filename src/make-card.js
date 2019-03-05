@@ -87,56 +87,58 @@ const ageRating = [
   `NC-17`
 ];
 
-// Генерируем рандомное описание фильма
-const getFilmDescription = (number) => {
+const descriptionFrases = [
+  `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+  `Cras aliquet varius magna, non porta ligula feugiat eget.`,
+  `Fusce tristique felis at fermentum pharetra.`,
+  `Aliquam id orci ut lectus varius viverra.`,
+  `Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.`,
+  `Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.`,
+  `Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.`,
+  `Sed sed nisi sed augue convallis suscipit in sed felis.`,
+  `Aliquam erat volutpat.`,
+  `Nunc fermentum tortor ac porta dapibus.`,
+  `In rutrum ac purus sit amet tempus.`
+];
+
+// Возвращает х фраз из массива
+const getFilmDescription = (array, number) => {
   let description = ``;
-  const frases = [
-    `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-    `Cras aliquet varius magna, non porta ligula feugiat eget.`,
-    `Fusce tristique felis at fermentum pharetra.`,
-    `Aliquam id orci ut lectus varius viverra.`,
-    `Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.`,
-    `Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.`,
-    `Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.`,
-    `Sed sed nisi sed augue convallis suscipit in sed felis.`,
-    `Aliquam erat volutpat.`,
-    `Nunc fermentum tortor ac porta dapibus.`,
-    `In rutrum ac purus sit amet tempus.`
-  ];
+
   for (let i = 1; i <= number; i++) {
-    const frase = frases[Math.floor(Math.random() * frases.length)];
+    const frase = array[Math.floor(Math.random() * array.length)];
     description += (i === number) ? frase : (frase + ` `);
   }
   return description;
 };
 
-// Генерируем рандомный рейтинг фильма
+// Возвращает дробное десятичное число (рейтинг)
 const getRating = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
 
-// Генерация рандомной даты
-const getRandomDate = () => Date.now() - getRandomNumber(10000000, 1000000000000);
+// Возвращает рандомную дату в диапазоне
+const getRandomDate = () => Date.now() - getRandomNumber(100000, 2000000000000);
 
-// Превращает минуты в часы и минуты
+// Возвращает часы и минуты из переданного кол-ва минут
 const formatTime = (minutes) => {
   const hours = Math.round(minutes / 60);
   const mins = (minutes % 60) ? (minutes % 60 + `m`) : ``;
   return `${hours}h&nbsp;${mins}`;
 };
 
-// Функция для выбора true или false
+// Возвращает true или false
 const getBoolean = () => Math.random() >= 0.5;
 
-// Отдаёт одно случайное значение из полученного массива
+// Возвращает одно случайное значение из массива
 const getRandomString = (array) => array[Math.floor(Math.random() * array.length)];
 
 // Возвращает num уникальных имён актёров из массива
-const getRandomActorsList = (actors, num) => {
-  const actorsArr = [];
-  const shuffled = actors.sort(() => Math.random() - 0.5);
+const getRandomUniqueList = (array, num) => {
+  const workArray = [];
+  const shuffled = array.sort(() => Math.random() - 0.5);
   for (let i = 0; i < num; i++) {
-    actorsArr.push(shuffled[i]);
+    workArray.push(shuffled[i]);
   }
-  return actorsArr.join(`, `);
+  return workArray.join(`, `);
 };
 
 // Получаем данные для карточки фильма
@@ -147,12 +149,11 @@ const makeCard = () => {
       original: getRandomString(filmTitles)
     },
     release: {
-      // year: getRandomNumber(1950, 2019),
       premiereDate: getRandomDate(),
       digitalDate: getRandomDate()
     },
-    actors: getRandomActorsList(actorsList, getRandomNumber(1, 5)), // нужна функция выбора неск. актёров из списка
-    description: getFilmDescription(getRandomNumber(1, 3)),
+    actors: getRandomUniqueList(actorsList, getRandomNumber(1, 5)),
+    description: getFilmDescription(descriptionFrases, getRandomNumber(1, 3)),
     duration: formatTime(getRandomNumber(60, 200)),
     seasons: getRandomNumber(0, 10),
     genre: getRandomString(filmGenres),
