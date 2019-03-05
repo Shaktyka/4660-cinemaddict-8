@@ -1,6 +1,7 @@
 import renderFilter from './render-filter.js';
 import {getRandomNumber} from './utils.js';
-import renderCardList from './render-card-list.js';
+import makeCard from './make-card.js';
+import renderCard from './render-card.js';
 
 // Стартовое кол-во карточек
 const cardsMainNumber = 7;
@@ -22,6 +23,15 @@ const filters = [
   `Stats`
 ];
 
+// Отрисовка списка задач
+const renderCardList = (amount, block) => {
+  block.innerHTML = ``;
+
+  for (let i = 0; i < amount; i++) {
+    block.appendChild(renderCard(makeCard()));
+  }
+};
+
 // Фильтры, для которых не нужны кол-ва карточек
 const activeFilterName = `All movies`;
 const addFilterName = `Stats`;
@@ -31,7 +41,14 @@ const renderFilterList = (filtersArr, block) => {
   filtersArr.forEach((filterName) => {
     const isActiveFilter = (filterName === activeFilterName) ? true : false;
     const isAddFilter = (filterName === addFilterName) ? true : false;
-    const count = isActiveFilter ? 7 : isAddFilter ? 0 : getRandomNumber(1, 20);
+
+    // Вычисление кол-ва карточек в зависимости от фильтра
+    let count = getRandomNumber(1, 20);
+    if (isActiveFilter) {
+      count = 7;
+    } else if (isAddFilter) {
+      count = 0;
+    }
 
     const filter = renderFilter(filterName, count, isActiveFilter, isAddFilter, renderCardList, filmsMainBlock);
 
