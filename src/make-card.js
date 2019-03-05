@@ -18,6 +18,24 @@ const filmTitles = [
   `Ralph Breaks the Internet`
 ];
 
+const actorsList = [
+  `Robert Downey Jr.`,
+  `Chris Hemsworth`,
+  `Mark Ruffalo`,
+  `Chris Evans`,
+  `Tom Cruise`,
+  `Henry Cavill`,
+  `Ving Rhames`,
+  `Simon Pegg`,
+  `Shameik Moore`,
+  `Jake Johnson`,
+  `Hailee Steinfeld`,
+  `Hailee Steinfeld`,
+  `Mahershala Ali`,
+  `Natalie Portman`,
+  `Tessa Thompson`
+];
+
 const filmGenres = [
   `Comedy`,
   `Drama`,
@@ -42,6 +60,31 @@ const filmPosters = [
   `./images/posters/fuga-da-new-york.jpg`,
   `./images/posters/accused.jpg`,
   `./images/posters/blackmail.jpg`
+];
+
+const filmCountries = [
+  `Russia`,
+  `UK`,
+  `China`,
+  `Japan`,
+  `France`,
+  `Canada`,
+  `USA`,
+  `India`,
+  `Italy`
+];
+
+const ageRating = [
+  `0+`,
+  `6+`,
+  `12+`,
+  `16+`,
+  `18+`,
+  `R`,
+  `G`,
+  `PG`,
+  `PG-13`,
+  `NC-17`
 ];
 
 // Генерируем рандомное описание фильма
@@ -70,6 +113,9 @@ const getFilmDescription = (number) => {
 // Генерируем рандомный рейтинг фильма
 const getRating = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
 
+// Генерация рандомной даты
+const getRandomDate = () => Date.now() - getRandomNumber(10000000, 1000000000000);
+
 // Превращает минуты в часы и минуты
 const formatTime = (minutes) => {
   const hours = Math.round(minutes / 60);
@@ -80,19 +126,44 @@ const formatTime = (minutes) => {
 // Функция для выбора true или false
 const getBoolean = () => Math.random() >= 0.5;
 
-// Отдаёт 1 случайное значение из полученного массива
+// Отдаёт одно случайное значение из полученного массива
 const getRandomString = (array) => array[Math.floor(Math.random() * array.length)];
+
+// Возвращает number имён актёров из переданного массива
+const getActors = (array, number) => {
+  let actors = ``;
+  for (let i = 1; i <= number; i++) {
+    const actor = array[Math.floor(Math.random() * array.length)];
+    actors += (i === number) ? actor : (actor + `, `);
+  }
+  // Функция должна возвр-ть список из неск. уник-х имён актёров
+  return actors;
+};
 
 // Получаем данные для карточки фильма
 const makeCard = () => {
   return {
-    filmTitle: getRandomString(filmTitles),
-    year: getRandomNumber(1950, 2019),
-    avgRating: getRating(0, 10),
-    duration: formatTime(getRandomNumber(60, 200)),
-    genre: getRandomString(filmGenres),
-    poster: getRandomString(filmPosters),
+    filmTitle: {
+      release: getRandomString(filmTitles),
+      original: getRandomString(filmTitles)
+    },
+    release: {
+      // year: getRandomNumber(1950, 2019),
+      premiereDate: getRandomDate(),
+      digitalDate: getRandomDate()
+    },
+    actors: getActors(actorsList, getRandomNumber(3, 7)), // нужна функция выбора неск. актёров из списка
     description: getFilmDescription(getRandomNumber(1, 3)),
+    duration: formatTime(getRandomNumber(60, 200)),
+    seasons: getRandomNumber(0, 10),
+    genre: getRandomString(filmGenres),
+    ageRating: getRandomString(ageRating),
+    rating: {
+      average: getRating(0, 10),
+      user: getRating(0, 10)
+    },
+    country: getRandomString(filmCountries),
+    poster: getRandomString(filmPosters),
     comments: getRandomNumber(0, 10),
     controls: {
       watchlist: getBoolean(),
