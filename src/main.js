@@ -14,6 +14,9 @@ const filmsMainBlock = document.querySelector(`.films .films-list__container`);
 const filmsTopBlock = document.querySelector(`.rating-top .films-list__container`);
 const filmsCommentsBlock = document.querySelector(`.comments-top .films-list__container`);
 
+// Активный фильтр
+let activeFilter = null;
+
 // Массив названий фильтров
 const filters = [
   `All movies`,
@@ -22,6 +25,13 @@ const filters = [
   `Favorites`,
   `Stats`
 ];
+
+// Переключение активного класса
+const switchActiveClass = (target) => {
+  activeFilter.classList.remove(`main-navigation__item--active`);
+  activeFilter = target;
+  target.classList.add(`main-navigation__item--active`);
+};
 
 // Отрисовка списка задач
 const renderCardList = (amount, block) => {
@@ -50,7 +60,11 @@ const renderFilterList = (filtersArr, block) => {
       count = 0;
     }
 
-    const filter = renderFilter(filterName, count, isActiveFilter, isAddFilter, renderCardList, filmsMainBlock);
+    const filter = renderFilter(filterName, count, isActiveFilter, isAddFilter, switchActiveClass, renderCardList, filmsMainBlock);
+
+    if (filter.querySelector(`a`).classList.contains(`main-navigation__item--active`)) {
+      activeFilter = filter.querySelector(`a`);
+    }
 
     block.appendChild(filter);
   });
