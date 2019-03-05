@@ -129,15 +129,14 @@ const getBoolean = () => Math.random() >= 0.5;
 // Отдаёт одно случайное значение из полученного массива
 const getRandomString = (array) => array[Math.floor(Math.random() * array.length)];
 
-// Возвращает number имён актёров из переданного массива
-const getActors = (array, number) => {
-  let actors = ``;
-  for (let i = 1; i <= number; i++) {
-    const actor = array[Math.floor(Math.random() * array.length)];
-    actors += (i === number) ? actor : (actor + `, `);
+// Возвращает num уникальных имён актёров из массива
+const getRandomActorsList = (actors, num) => {
+  const actorsArr = [];
+  const shuffled = actors.sort(() => Math.random() - 0.5);
+  for (let i = 0; i < num; i++) {
+    actorsArr.push(shuffled[i]);
   }
-  // Функция должна возвр-ть список из неск. уник-х имён актёров
-  return actors;
+  return actorsArr.join(`, `);
 };
 
 // Получаем данные для карточки фильма
@@ -152,7 +151,7 @@ const makeCard = () => {
       premiereDate: getRandomDate(),
       digitalDate: getRandomDate()
     },
-    actors: getActors(actorsList, getRandomNumber(3, 7)), // нужна функция выбора неск. актёров из списка
+    actors: getRandomActorsList(actorsList, getRandomNumber(1, 5)), // нужна функция выбора неск. актёров из списка
     description: getFilmDescription(getRandomNumber(1, 3)),
     duration: formatTime(getRandomNumber(60, 200)),
     seasons: getRandomNumber(0, 10),

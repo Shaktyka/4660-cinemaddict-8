@@ -2,7 +2,6 @@ import renderElement from './utils.js';
 
 // Рендеринг одной задачи
 const renderCard = (cardData) => {
- // console.log(cardData);
   const releaseYear = new Date(cardData.release.premiereDate).getFullYear();
 
   const string = `<article class="film-card ${(cardData.isControls) ? `` : `film-card--no-controls`}">
