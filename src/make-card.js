@@ -170,7 +170,7 @@ const makeCard = () => {
       watched: getBoolean(),
       favorite: getBoolean()
     },
-    isControls: getBoolean()
+    hasControls: getBoolean()
   };
 };
 
