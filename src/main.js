@@ -53,11 +53,13 @@ const renderFilterList = (filtersArr, block) => {
     const isAddFilter = (filterName === addFilterName) ? true : false;
 
     // Вычисление кол-ва карточек в зависимости от фильтра
-    let count = getRandomNumber(1, 20);
+    let count = 0;
     if (isActiveFilter) {
       count = 7;
     } else if (isAddFilter) {
       count = 0;
+    } else {
+      count = getRandomNumber(1, 20);
     }
 
     const filter = renderFilter(filterName, count, isActiveFilter, isAddFilter, switchActiveClass, renderCardList, filmsMainBlock);
