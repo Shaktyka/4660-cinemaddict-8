@@ -27,10 +27,10 @@ const filters = [
 ];
 
 // Переключение активного класса
-const switchActiveClass = (target) => {
+const changeActiveFilterClass = (clickedFilter) => {
   activeFilter.classList.remove(`main-navigation__item--active`);
-  activeFilter = target;
-  target.classList.add(`main-navigation__item--active`);
+  activeFilter = clickedFilter;
+  clickedFilter.classList.add(`main-navigation__item--active`);
 };
 
 // Отрисовка списка задач
@@ -65,7 +65,7 @@ const renderFilterList = (filtersArr, block) => {
       count = getRandomNumber(1, 20);
     }
 
-    const filter = renderFilter(filterName, count, isActiveFilter, isAdditionalFilter, switchActiveClass, renderCardList, filmsMainBlock);
+    const filter = renderFilter(filterName, count, isActiveFilter, isAdditionalFilter, changeActiveFilterClass, renderCardList, filmsMainBlock);
 
     if (filter.querySelector(`a`).classList.contains(`main-navigation__item--active`)) {
       activeFilter = filter.querySelector(`a`);
