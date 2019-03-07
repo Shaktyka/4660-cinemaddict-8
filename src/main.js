@@ -45,7 +45,7 @@ const renderCardList = (amount, block) => {
 
 // Фильтры, для которых не нужны кол-ва карточек
 const activeFilterName = `All movies`;
-const addFilterName = `Stats`;
+const additionalFilterName = `Stats`;
 
 // Рендеринг фильтра
 const renderFilterList = (filtersArr, block) => {
@@ -53,19 +53,19 @@ const renderFilterList = (filtersArr, block) => {
 
   filtersArr.forEach((filterName) => {
     const isActiveFilter = (filterName === activeFilterName) ? true : false;
-    const isAddFilter = (filterName === addFilterName) ? true : false;
+    const isAdditionalFilter = (filterName === additionalFilterName) ? true : false;
 
     // Вычисление кол-ва карточек в зависимости от фильтра
     let count = 0;
     if (isActiveFilter) {
       count = 7;
-    } else if (isAddFilter) {
+    } else if (isAdditionalFilter) {
       count = 0;
     } else {
       count = getRandomNumber(1, 20);
     }
 
-    const filter = renderFilter(filterName, count, isActiveFilter, isAddFilter, switchActiveClass, renderCardList, filmsMainBlock);
+    const filter = renderFilter(filterName, count, isActiveFilter, isAdditionalFilter, switchActiveClass, renderCardList, filmsMainBlock);
 
     if (filter.querySelector(`a`).classList.contains(`main-navigation__item--active`)) {
       activeFilter = filter.querySelector(`a`);
