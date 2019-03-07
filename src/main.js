@@ -36,10 +36,11 @@ const switchActiveClass = (target) => {
 // Отрисовка списка задач
 const renderCardList = (amount, block) => {
   block.innerHTML = ``;
-
+  const fragment = document.createDocumentFragment();
   for (let i = 0; i < amount; i++) {
-    block.appendChild(renderCard(makeCard()));
+    fragment.appendChild(renderCard(makeCard()));
   }
+  block.appendChild(fragment);
 };
 
 // Фильтры, для которых не нужны кол-ва карточек
@@ -48,6 +49,8 @@ const addFilterName = `Stats`;
 
 // Рендеринг фильтра
 const renderFilterList = (filtersArr, block) => {
+  const fragment = document.createDocumentFragment();
+
   filtersArr.forEach((filterName) => {
     const isActiveFilter = (filterName === activeFilterName) ? true : false;
     const isAddFilter = (filterName === addFilterName) ? true : false;
@@ -68,8 +71,9 @@ const renderFilterList = (filtersArr, block) => {
       activeFilter = filter.querySelector(`a`);
     }
 
-    block.appendChild(filter);
+    fragment.appendChild(filter);
   });
+  block.appendChild(fragment);
 };
 
 // Стартовый рендеринг фильтра
