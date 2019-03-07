@@ -128,9 +128,6 @@ const formatTime = (minutes) => {
 // Возвращает true или false
 const getBoolean = () => Math.random() >= 0.5;
 
-// Возвращает одно случайное значение из массива
-const getRandomString = (array) => array[Math.floor(Math.random() * array.length)];
-
 // Возвращает num уникальных имён актёров из массива
 const getRandomUniqueList = (array, num) => {
   const workArray = [];
@@ -145,25 +142,26 @@ const getRandomUniqueList = (array, num) => {
 const makeCard = () => {
   return {
     filmTitle: {
-      release: getRandomString(filmTitles),
-      original: getRandomString(filmTitles)
+      release: filmTitles[getRandomNumber(0, filmTitles.length - 1)],
+      original: filmTitles[getRandomNumber(0, filmTitles.length - 1)]
     },
     release: {
       premiereDate: getRandomDate(),
-      digitalDate: getRandomDate()
+      digitalDate: getRandomDate(),
+      year: getRandomNumber(1950, 2019)
     },
     actors: getRandomUniqueList(actorsList, getRandomNumber(1, 5)),
     description: getFilmDescription(descriptionFrases, getRandomNumber(1, 3)),
     duration: formatTime(getRandomNumber(60, 200)),
     seasons: getRandomNumber(0, 10),
-    genre: getRandomString(filmGenres),
-    ageRating: getRandomString(ageRating),
+    genre: filmGenres[getRandomNumber(0, filmGenres.length - 1)],
+    ageRating: ageRating[getRandomNumber(0, ageRating.length - 1)],
     rating: {
       average: getRating(0, 10),
       user: getRating(0, 10)
     },
-    country: getRandomString(filmCountries),
-    poster: getRandomString(filmPosters),
+    country: filmCountries[getRandomNumber(0, filmCountries.length - 1)],
+    poster: filmPosters[getRandomNumber(0, filmPosters.length - 1)],
     comments: getRandomNumber(0, 10),
     controls: {
       watchlist: getBoolean(),

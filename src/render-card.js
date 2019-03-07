@@ -6,7 +6,7 @@ const renderCard = (cardData) => {
   <h3 class="film-card__title">${cardData.filmTitle.release}</h3>
   <p class="film-card__rating">${cardData.rating.average}</p>
   <p class="film-card__info">
-    <span class="film-card__year">${new Date(cardData.release.premiereDate).getFullYear()}</span>
+    <span class="film-card__year">${cardData.release.year}</span>
     <span class="film-card__duration">${cardData.duration}</span>
     <span class="film-card__genre">${cardData.genre}</span>
   </p>
