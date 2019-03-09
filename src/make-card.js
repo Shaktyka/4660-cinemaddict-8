@@ -184,7 +184,7 @@ const makeCard = () => {
       year: getRandomNumber(1950, 2019)
     },
     director: filmDirectors[getRandomNumber(0, filmDirectors.length - 1)],
-    writer: filmWriters[getRandomNumber(0, filmWriters.length - 1)],
+    writers: getRandomUniqueList(filmWriters, getRandomNumber(1, 3)),
     actors: getRandomUniqueList(actorsList, getRandomNumber(1, 5)),
     description: getFilmDescription(descriptionFrases, getRandomNumber(1, 3)),
     duration: formatTime(getRandomNumber(60, 200)),
