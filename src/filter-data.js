@@ -4,7 +4,7 @@ const filterData = [
   {
     title: `All movies`,
     className: `main-navigation__item main-navigation__item--active`,
-    count: 0
+    count: 7
   },
   {
     title: `Watchlist`,

@@ -1,6 +1,5 @@
 import filterData from './filter-data.js';
 import renderFilter from './render-filter.js';
-import {getRandomNumber} from './utils.js';
 import makeCard from './make-card.js';
 import renderCard from './render-card.js';
 
@@ -36,15 +35,16 @@ const renderCardList = (amount, block) => {
 };
 
 // Рендеринг фильтра
-const renderFilterList = (filterData, block) => {
+const renderFilterList = (filterArray, block) => {
   const fragment = document.createDocumentFragment();
 
-  filterData.forEach((filterDataObject) => {
+  filterArray.forEach((filterDataObject) => {
     const filter = renderFilter(filterDataObject, changeActiveFilterClass, renderCardList, filmsMainBlock);
     fragment.appendChild(filter);
   });
 
   block.appendChild(fragment);
+  activeFilter = document.querySelector(`.main-navigation__item--active`);
 };
 
 // Стартовый рендеринг фильтра
