@@ -1,5 +1,38 @@
 import {getRandomNumber} from './utils.js';
 
+const filmDirectors = [
+  `Coward Robert Ford`,
+  `Steven Caple Jr.`,
+  `Julius Avery`,
+  `Anthony Russo`,
+  `Christopher McQuarrie`,
+  `Alex Garland`,
+  `Bradley Cooper`,
+  `Ryan Coogler`,
+  `Damien Chazelle`,
+  `Steven Spielberg`,
+  `Phil Johnston`,
+  `Paul King`,
+  `Wes Ball`,
+  `Brad Bird`,
+  `Travis Knight`
+];
+
+const filmWriters = [
+  `Billy Wilder`,
+  `Ethan Coen and Joel Coen`,
+  `Robert Towne`,
+  `Quentin Tarantino`,
+  `Francis Ford Coppola`,
+  `William Goldman`,
+  `Charlie Kaufman`,
+  `Woody Allen`,
+  `Nora Ephron`,
+  `Ernest Lehman`,
+  `Paul Schrader`,
+  `Oliver Stone`
+];
+
 const filmTitles = [
   `The Assassination Of Jessie James`,
   `Creed II`,
@@ -150,6 +183,8 @@ const makeCard = () => {
       digitalDate: getRandomDate(),
       year: getRandomNumber(1950, 2019)
     },
+    director: filmDirectors[getRandomNumber(0, filmDirectors.length - 1)],
+    writer: filmWriters[getRandomNumber(0, filmWriters.length - 1)],
     actors: getRandomUniqueList(actorsList, getRandomNumber(1, 5)),
     description: getFilmDescription(descriptionFrases, getRandomNumber(1, 3)),
     duration: formatTime(getRandomNumber(60, 200)),
