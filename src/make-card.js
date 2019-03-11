@@ -88,11 +88,11 @@ const filmGenres = [
 ];
 
 const filmPosters = [
-  `./images/posters/three-friends.jpg`,
-  `./images/posters/moonrise.jpg`,
-  `./images/posters/fuga-da-new-york.jpg`,
-  `./images/posters/accused.jpg`,
-  `./images/posters/blackmail.jpg`
+  `three-friends.jpg`,
+  `moonrise.jpg`,
+  `fuga-da-new-york.jpg`,
+  `accused.jpg`,
+  `blackmail.jpg`
 ];
 
 const filmCountries = [
@@ -134,17 +134,6 @@ const descriptionFrases = [
   `In rutrum ac purus sit amet tempus.`
 ];
 
-// Возвращает х фраз из массива
-const getFilmDescription = (array, number) => {
-  let description = ``;
-
-  for (let i = 1; i <= number; i++) {
-    const frase = array[Math.floor(Math.random() * array.length)];
-    description += (i === number) ? frase : (frase + ` `);
-  }
-  return description;
-};
-
 // Возвращает дробное десятичное число (рейтинг)
 const getRating = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
 
@@ -161,14 +150,14 @@ const formatTime = (minutes) => {
 // Возвращает true или false
 const getBoolean = () => Math.random() >= 0.5;
 
-// Возвращает num уникальных имён актёров из массива
-const getRandomUniqueList = (array, num) => {
-  const workArray = [];
+// Возвращает строку из num уникальных элементов массива, разделённых переданным 3-м параметром разделителем
+const getRandomUniqueList = (array, num, delimeter = `, `) => {
+  const uniqueList = [];
   const shuffled = array.sort(() => Math.random() - 0.5);
   for (let i = 0; i < num; i++) {
-    workArray.push(shuffled[i]);
+    uniqueList.push(shuffled[i]);
   }
-  return workArray.join(`, `);
+  return uniqueList.join(delimeter);
 };
 
 // Получаем данные для карточки фильма
@@ -186,7 +175,7 @@ const makeCard = () => {
     director: filmDirectors[getRandomNumber(0, filmDirectors.length - 1)],
     writers: getRandomUniqueList(filmWriters, getRandomNumber(1, 3)),
     actors: getRandomUniqueList(actorsList, getRandomNumber(1, 5)),
-    description: getFilmDescription(descriptionFrases, getRandomNumber(1, 3)),
+    description: getRandomUniqueList(descriptionFrases, getRandomNumber(1, 3), ` `),
     duration: formatTime(getRandomNumber(60, 200)),
     seasons: getRandomNumber(0, 10),
     genre: filmGenres[getRandomNumber(0, filmGenres.length - 1)],
