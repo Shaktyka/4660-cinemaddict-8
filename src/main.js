@@ -39,7 +39,9 @@ const renderFilterList = (filterArray, block) => {
   const fragment = document.createDocumentFragment();
 
   filterArray.forEach((filterDataObject) => {
-    const filter = renderFilter(filterDataObject, changeActiveFilterClass, renderCardList, filmsMainBlock);
+    const filtersWithoutCount = filterDataObject.title === `All movies` || filterDataObject.title === `Stats`;
+
+    const filter = renderFilter(filterDataObject, filtersWithoutCount, changeActiveFilterClass, renderCardList, filmsMainBlock);
     fragment.appendChild(filter);
   });
 

@@ -1,17 +1,14 @@
 import renderElement from './utils.js';
 
-const renderFilter = (filterDataObject, changeActiveFilterClass, renderCardList, cardBlock) => {
-  const cardsCount = filterDataObject.count;
-  const filtersWithoutCount = filterDataObject.title === `All movies` || filterDataObject.title === `Stats`;
-
-  const string = `<a href="#${filterDataObject.title}" class="${filterDataObject.className}">${filterDataObject.title} ${filtersWithoutCount ? `` : `<span class ="main-navigation__item-count">${cardsCount}</span>`}</a>`;
+const renderFilter = (filterDataObject, filtersWithoutCount, changeActiveFilterClass, renderCardList, cardBlock) => {
+  const string = `<a href="#${filterDataObject.title}" class="main-navigation__item ${filterDataObject.active ? `main-navigation__item--active` : ``} ${filterDataObject.additional ? `main-navigation__item--additional` : ``}">${filterDataObject.title} ${filtersWithoutCount ? `` : `<span class ="main-navigation__item-count">${filterDataObject.count}</span>`}</a>`;
   const element = renderElement(string);
   const link = element.querySelector(`.main-navigation__item`);
 
   link.addEventListener(`click`, (evt) => {
     evt.preventDefault();
 
-    renderCardList(cardsCount, cardBlock);
+    renderCardList(filterDataObject.count, cardBlock);
     changeActiveFilterClass(evt.target);
   });
 

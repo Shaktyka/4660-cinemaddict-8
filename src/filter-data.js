@@ -3,28 +3,33 @@ import {getRandomNumber} from './utils.js';
 const filterData = [
   {
     title: `All movies`,
-    className: `main-navigation__item main-navigation__item--active`,
-    count: 7
+    count: 7,
+    active: true,
+    additional: false
   },
   {
     title: `Watchlist`,
-    className: `main-navigation__item`,
-    count: getRandomNumber(1, 12)
+    count: getRandomNumber(1, 12),
+    active: false,
+    additional: false
   },
   {
     title: `History`,
-    className: `main-navigation__item`,
-    count: getRandomNumber(1, 12)
+    count: getRandomNumber(1, 12),
+    active: false,
+    additional: false
   },
   {
     title: `Favorites`,
-    className: `main-navigation__item`,
-    count: getRandomNumber(1, 12)
+    count: getRandomNumber(1, 12),
+    active: false,
+    additional: false
   },
   {
     title: `Stats`,
-    className: `main-navigation__item main-navigation__item--additional`,
-    count: 0
+    count: 0,
+    active: false,
+    additional: true
   }
 ];
 
