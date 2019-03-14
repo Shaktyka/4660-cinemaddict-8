@@ -169,8 +169,7 @@ const makeCard = () => {
     },
     release: {
       premiereDate: getRandomDate(),
-      digitalDate: getRandomDate(),
-      year: getRandomNumber(1950, 2019)
+      digitalDate: getRandomDate()
     },
     director: filmDirectors[getRandomNumber(0, filmDirectors.length - 1)],
     writers: getRandomUniqueList(filmWriters, getRandomNumber(1, 3)),
@@ -187,11 +186,9 @@ const makeCard = () => {
     country: filmCountries[getRandomNumber(0, filmCountries.length - 1)],
     poster: filmPosters[getRandomNumber(0, filmPosters.length - 1)],
     comments: getRandomNumber(0, 10),
-    controls: {
-      watchlist: getBoolean(),
-      watched: getBoolean(),
-      favorite: getBoolean()
-    },
+    inWatchlist: getBoolean(),
+    isWatched: getBoolean(),
+    isFavorite: getBoolean(),
     hasControls: getBoolean()
   };
 };
