@@ -1,5 +1,6 @@
 import filterData from './filter-data.js';
 import renderFilter from './render-filter.js';
+import renderStatsElement from './render-stats-element.js';
 import makeCard from './make-card.js';
 import renderCard from './render-card.js';
 
@@ -40,13 +41,15 @@ const renderFilterList = (filterArray, block) => {
   const fragment = document.createDocumentFragment();
 
   filterArray.forEach((filterDataObject) => {
-    const filtersWithoutCount = filterDataObject.title === `All movies` || filterDataObject.title === `Stats`;
+    const filterWithoutCount = filterDataObject.title === `All movies`;
+    const isActiveFilter = filterDataObject.title === `All movies`;
 
-    const filter = renderFilter(filterDataObject, filtersWithoutCount, changeActiveFilterClass, renderCardList, filmsMainBlock);
+    const filter = renderFilter(filterDataObject, filterWithoutCount, isActiveFilter, changeActiveFilterClass, renderCardList, filmsMainBlock);
     fragment.appendChild(filter);
   });
 
   block.appendChild(fragment);
+  block.appendChild(renderStatsElement());
   activeFilter = document.querySelector(`.main-navigation__item--active`);
 };
 
