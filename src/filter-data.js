@@ -3,33 +3,19 @@ import {getRandomNumber} from './utils.js';
 const filterData = [
   {
     title: `All movies`,
-    count: 7,
-    active: true,
-    additional: false
+    count: 7
   },
   {
     title: `Watchlist`,
-    count: getRandomNumber(1, 12),
-    active: false,
-    additional: false
+    count: getRandomNumber(1, 12)
   },
   {
     title: `History`,
-    count: getRandomNumber(1, 12),
-    active: false,
-    additional: false
+    count: getRandomNumber(1, 12)
   },
   {
     title: `Favorites`,
-    count: getRandomNumber(1, 12),
-    active: false,
-    additional: false
-  },
-  {
-    title: `Stats`,
-    count: 0,
-    active: false,
-    additional: true
+    count: getRandomNumber(1, 12)
   }
 ];
 

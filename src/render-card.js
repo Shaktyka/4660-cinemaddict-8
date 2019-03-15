@@ -1,8 +1,10 @@
 import renderElement from './utils.js';
 
+// ${(cardData.hasControls) ? `` : `film-card--no-controls`}
+
 // Рендеринг одной задачи
 const renderCard = (cardData) => {
-  const string = `<article class="film-card ${(cardData.hasControls) ? `` : `film-card--no-controls`}">
+  const string = `<article class="film-card">
   <h3 class="film-card__title">${cardData.filmTitle.release}</h3>
   <p class="film-card__rating">${cardData.rating.average}</p>
   <p class="film-card__info">

@@ -1,5 +1,11 @@
 import {getRandomNumber} from './utils.js';
 
+// Границы в миллисекундах
+const Milliseconds = {
+  ONE_HOUR: 3600000,
+  SIXTY_THREE_YEARS: 1892160000025
+};
+
 const filmDirectors = [
   `Coward Robert Ford`,
   `Steven Caple Jr.`,
@@ -138,7 +144,7 @@ const descriptionFrases = [
 const getRating = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
 
 // Возвращает рандомную дату в диапазоне
-const getRandomDate = () => Date.now() - getRandomNumber(100000, 2000000000000);
+const getRandomDate = () => Date.now() - getRandomNumber(Milliseconds.ONE_HOUR, Milliseconds.SIXTY_THREE_YEARS);
 
 // Возвращает часы и минуты из переданного кол-ва минут
 const formatTime = (minutes) => {
@@ -150,15 +156,18 @@ const formatTime = (minutes) => {
 // Возвращает true или false
 const getBoolean = () => Math.random() >= 0.5;
 
-// Возвращает строку из num уникальных элементов массива, разделённых переданным 3-м параметром разделителем
-const getRandomUniqueList = (array, num, delimeter = `, `) => {
-  const uniqueList = [];
-  const shuffled = array.sort(() => Math.random() - 0.5);
-  for (let i = 0; i < num; i++) {
-    uniqueList.push(shuffled[i]);
+// Перемешивает массив
+const shuffleArray = (array) => {
+  const copiedArray = array.slice();
+  for (let i = copiedArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copiedArray[i], copiedArray[j]] = [copiedArray[j], copiedArray[i]];
   }
-  return uniqueList.join(delimeter);
+  return copiedArray;
 };
+
+// Возвращает х элементов из массива
+const getElementsFromArray = (array, num) => shuffleArray(array).slice(0, num);
 
 // Получаем данные для карточки фильма
 const makeCard = () => {
@@ -172,9 +181,9 @@ const makeCard = () => {
       digitalDate: getRandomDate()
     },
     director: filmDirectors[getRandomNumber(0, filmDirectors.length - 1)],
-    writers: getRandomUniqueList(filmWriters, getRandomNumber(1, 3)),
-    actors: getRandomUniqueList(actorsList, getRandomNumber(1, 5)),
-    description: getRandomUniqueList(descriptionFrases, getRandomNumber(1, 3), ` `),
+    writers: getElementsFromArray(filmWriters, getRandomNumber(1, 3)),
+    actors: getElementsFromArray(actorsList, getRandomNumber(1, 5)),
+    description: getElementsFromArray(descriptionFrases, getRandomNumber(1, 3)),
     duration: formatTime(getRandomNumber(60, 200)),
     seasons: getRandomNumber(0, 10),
     genre: filmGenres[getRandomNumber(0, filmGenres.length - 1)],
@@ -188,8 +197,7 @@ const makeCard = () => {
     comments: getRandomNumber(0, 10),
     inWatchlist: getBoolean(),
     isWatched: getBoolean(),
-    isFavorite: getBoolean(),
-    hasControls: getBoolean()
+    isFavorite: getBoolean()
   };
 };
 
