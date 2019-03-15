@@ -28,8 +28,9 @@ const changeActiveFilterClass = (clickedFilter) => {
 const renderCardList = (amount, block) => {
   block.innerHTML = ``;
   const fragment = document.createDocumentFragment();
+  const hasControls = (block === filmsMainBlock) ? true : false;
   for (let i = 0; i < amount; i++) {
-    fragment.appendChild(renderCard(makeCard()));
+    fragment.appendChild(renderCard(makeCard(), hasControls));
   }
   block.appendChild(fragment);
 };

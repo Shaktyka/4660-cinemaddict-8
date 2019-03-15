@@ -1,6 +1,6 @@
 import {getRandomNumber} from './utils.js';
 
-// Границы в миллисекундах
+// Количества миллисекунд для ограничения выборки timestamp
 const Milliseconds = {
   ONE_HOUR: 3600000,
   SIXTY_THREE_YEARS: 1892160000025
