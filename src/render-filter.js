@@ -1,24 +1,15 @@
 import renderElement from './utils.js';
 
-// Активный фильтр
-let activeFilter = null;
-
-// Рендеринг одного фильтра
-const renderFilter = (filterName, cardAmount = 0, isActive = false, isAdditional = false, cb, cardBlock) => {
-  const string = `<a href="#${filterName}" class="main-navigation__item ${isActive ? ` main-navigation__item--active` : ``} ${isAdditional ? ` main-navigation__item--additional` : ``}">${filterName} ${cardAmount ? `<span class ="main-navigation__item-count">${cardAmount}</span>` : ``}</a>`;
+const renderFilter = (filterDataObject, filterWithoutCount, isActiveFilter, changeActiveFilterClass, renderCardList, cardBlock) => {
+  const string = `<a href="#${filterDataObject.title}" class="main-navigation__item ${isActiveFilter ? `main-navigation__item--active` : ``}">${filterDataObject.title} ${filterWithoutCount ? `` : `<span class ="main-navigation__item-count">${filterDataObject.count}</span>`}</a>`;
   const element = renderElement(string);
   const link = element.querySelector(`.main-navigation__item`);
-
-  activeFilter = (link.classList.contains(`main-navigation__item--active`)) ? link : activeFilter;
 
   link.addEventListener(`click`, (evt) => {
     evt.preventDefault();
 
-    cb(cardAmount, cardBlock);
-
-    activeFilter.classList.remove(`main-navigation__item--active`);
-    activeFilter = evt.target;
-    evt.target.classList.add(`main-navigation__item--active`);
+    renderCardList(filterDataObject.count, cardBlock);
+    changeActiveFilterClass(evt.target);
   });
 
   return element;

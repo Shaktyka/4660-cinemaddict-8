@@ -1,48 +1,62 @@
+import filterData from './filter-data.js';
 import renderFilter from './render-filter.js';
-import {getRandomNumber} from './utils.js';
-import renderCardList from './render-card-list.js';
+import renderStatsElement from './render-stats-element.js';
+import makeCard from './make-card.js';
+import renderCard from './render-card.js';
 
-// Стартовое кол-во карточек
-const cardsMainNumber = 7;
-const cardsTopNumber = 2;
-const cardsCommentsNumber = 2;
+const FilmCardsNumber = {
+  MAIN: 7,
+  TOP_RATED: 2,
+  TOP_COMMENTED: 2
+};
 
 const filterBlock = document.querySelector(`.main-navigation`);
-
 const filmsMainBlock = document.querySelector(`.films .films-list__container`);
 const filmsTopBlock = document.querySelector(`.rating-top .films-list__container`);
 const filmsCommentsBlock = document.querySelector(`.comments-top .films-list__container`);
 
-// Массив названий фильтров
-const filters = [
-  `All movies`,
-  `Watchlist`,
-  `History`,
-  `Favorites`,
-  `Stats`
-];
+// Активный фильтр
+let activeFilter = null;
 
-// Фильтры, для которых не нужны кол-ва карточек
-const activeFilterName = `All movies`;
-const addFilterName = `Stats`;
+// Переключение активного класса
+const changeActiveFilterClass = (clickedFilter) => {
+  activeFilter.classList.remove(`main-navigation__item--active`);
+  activeFilter = clickedFilter;
+  clickedFilter.classList.add(`main-navigation__item--active`);
+};
+
+// Отрисовка списка задач
+const renderCardList = (amount, block) => {
+  block.innerHTML = ``;
+  const fragment = document.createDocumentFragment();
+  const hasControls = (block === filmsMainBlock) ? true : false;
+  for (let i = 0; i < amount; i++) {
+    fragment.appendChild(renderCard(makeCard(), hasControls));
+  }
+  block.appendChild(fragment);
+};
 
 // Рендеринг фильтра
-const renderFilterList = (filtersArr, block) => {
-  filtersArr.forEach((filterName) => {
-    const isActiveFilter = (filterName === activeFilterName) ? true : false;
-    const isAddFilter = (filterName === addFilterName) ? true : false;
-    const count = (isActiveFilter || isAddFilter) ? 0 : getRandomNumber(1, 20);
+const renderFilterList = (filterArray, block) => {
+  const fragment = document.createDocumentFragment();
 
-    const filter = renderFilter(filterName, count, isActiveFilter, isAddFilter, renderCardList, filmsMainBlock);
+  filterArray.forEach((filterDataObject) => {
+    const filterWithoutCount = filterDataObject.title === `All movies`;
+    const isActiveFilter = filterDataObject.title === `All movies`;
 
-    block.appendChild(filter);
+    const filter = renderFilter(filterDataObject, filterWithoutCount, isActiveFilter, changeActiveFilterClass, renderCardList, filmsMainBlock);
+    fragment.appendChild(filter);
   });
+
+  block.appendChild(fragment);
+  block.appendChild(renderStatsElement());
+  activeFilter = document.querySelector(`.main-navigation__item--active`);
 };
 
 // Стартовый рендеринг фильтра
-renderFilterList(filters, filterBlock);
+renderFilterList(filterData, filterBlock);
 
-// Стартовая отрисовка карточек в основной блок
-renderCardList(cardsMainNumber, filmsMainBlock);
-renderCardList(cardsTopNumber, filmsTopBlock);
-renderCardList(cardsCommentsNumber, filmsCommentsBlock);
+// Стартовая отрисовка карточек в предназначенные для них блоки
+renderCardList(FilmCardsNumber.MAIN, filmsMainBlock);
+renderCardList(FilmCardsNumber.TOP_RATED, filmsTopBlock);
+renderCardList(FilmCardsNumber.TOP_COMMENTED, filmsCommentsBlock);

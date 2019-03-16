@@ -1,23 +1,19 @@
-import renderElement from './utils.js';
+import {renderElement, getStringFromArray} from './utils.js';
 
 // Рендеринг одной задачи
-const renderCard = () => {
-  const string = `<article class="film-card">
-  <h3 class="film-card__title">The Assassination Of Jessie James By The Coward Robert Ford</h3>
-  <p class="film-card__rating">9.8</p>
-  <p class="film-card__info">
-    <span class="film-card__year">2018</span>
-    <span class="film-card__duration">1h&nbsp;13m</span>
-    <span class="film-card__genre">Comedy</span>
-  </p>
-  <img src="./images/posters/three-friends.jpg" alt="" class="film-card__poster">
-  <p class="film-card__description">A priest with a haunted past and a novice on the threshold of her final vows are sent by the Vatican to investigate the death of a young nun in Romania and confront a malevolent force in the form of a demonic nun.</p>
-  <button class="film-card__comments">13 comments</button>
-  <form class="film-card__controls">
-    <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist"><!--Add to watchlist--> WL</button>
-    <button class="film-card__controls-item button film-card__controls-item--mark-as-watched"><!--Mark as watched-->WTCHD</button>
-    <button class="film-card__controls-item button film-card__controls-item--favorite"><!--Mark as favorite-->FAV</button>
-  </form>
+const renderCard = (cardData, hasControls) => {
+  const string = `<article class="film-card ${hasControls ? `` : `film-card--no-controls`}">
+    <h3 class="film-card__title">${cardData.filmTitle.release}</h3>
+    <p class="film-card__rating">${cardData.rating.average}</p>
+    <p class="film-card__info">
+      <span class="film-card__year">${new Date(cardData.release.premiereDate).getFullYear()}</span>
+      <span class="film-card__duration">${cardData.duration}</span>
+      <span class="film-card__genre">${cardData.genre}</span>
+    </p>
+    <img src="./images/posters/${cardData.poster}" alt="${cardData.filmTitle.release}" class="film-card__poster">
+    <p class="film-card__description">${getStringFromArray(cardData.description, ` `)}</p>
+    <button class="film-card__comments">${cardData.comments} comments</button>
+    ${hasControls ? `<form class="film-card__controls"><button class="film-card__controls-item button film-card__controls-item--add-to-watchlist">${cardData.inWatchlist ? `WL` : `Add to watchlist`}</button><button class="film-card__controls-item button film-card__controls-item--mark-as-watched">${cardData.isWatched ? `WTCHD` : `Mark as watched`}</button><button class="film-card__controls-item button film-card__controls-item--favorite">${cardData.isFavorite ? `FAV` : `Mark as favorite`}</button></form>` : ``}
   </article>`;
 
   return renderElement(string);
