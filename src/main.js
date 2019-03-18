@@ -29,7 +29,7 @@ const changeActiveFilterClass = (clickedFilter) => {
 const renderCardList = (amount, block) => {
   block.innerHTML = ``;
   const fragment = document.createDocumentFragment();
-  const hasControls = (block === filmsMainBlock) ? true : false;
+  const hasControls = block === filmsMainBlock;
   for (let i = 0; i < amount; i++) {
     const filmCard = new Card(makeCard(), hasControls).render(fragment);
   }
@@ -41,10 +41,10 @@ const renderFilterList = (filterArray, block) => {
   const fragment = document.createDocumentFragment();
 
   filterArray.forEach((filterDataObject) => {
-    const filterWithoutCount = filterDataObject.title === `All movies`;
+    const isWithoutCount = filterDataObject.title === `All movies`;
     const isActiveFilter = filterDataObject.title === `All movies`;
 
-    const filter = renderFilter(filterDataObject, filterWithoutCount, isActiveFilter, changeActiveFilterClass, renderCardList, filmsMainBlock);
+    const filter = renderFilter(filterDataObject, isWithoutCount, isActiveFilter, changeActiveFilterClass, renderCardList, filmsMainBlock);
     fragment.appendChild(filter);
   });
 
