@@ -3,7 +3,6 @@ import renderFilter from './render-filter.js';
 import renderStatsElement from './render-stats-element.js';
 import makeCard from './make-card.js';
 import Card from './card.js';
-// import renderCard from './render-card.js';
 
 const FilmCardsNumber = {
   MAIN: 7,
