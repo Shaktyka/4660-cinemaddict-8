@@ -5,7 +5,7 @@ class Card {
   constructor(data, hasControls) {
     this._title = data.filmTitle.release;
     this._avgRating = data.rating.average;
-    this._year = new Date(data.release.premiereDate).getFullYear(); // как быть с годом?
+    this._year = new Date(data.release.premiereDate).getFullYear();
     this._duration = data.duration;
     this._genre = data.genre;
     this._poster = data.poster;
@@ -14,15 +14,13 @@ class Card {
     this._inWatchlist = data.inWatchlist;
     this._isWatched = data.isWatched;
     this._isFavorite = data.isFavorite;
-
     this._element = null;
     this._hasControls = hasControls;
   }
 
   // Формирует шаблон с данными
   get template() {
-    return `
-    <article class="film-card ${this._hasControls ? `` : `film-card--no-controls`}">
+    return `<article class="film-card ${this._hasControls ? `` : `film-card--no-controls`}">
       <h3 class="film-card__title">${this._title}</h3>
       <p class="film-card__rating">${this._avgRating}</p>
       <p class="film-card__info">
@@ -46,6 +44,8 @@ class Card {
 
     this._element = renderElement(this.template);
     container.appendChild(this._element);
+
+    // здесь же должны устанавл-ся обраб-ки событий
   }
 
   unrender() {
