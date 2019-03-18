@@ -2,7 +2,8 @@ import filterData from './filter-data.js';
 import renderFilter from './render-filter.js';
 import renderStatsElement from './render-stats-element.js';
 import makeCard from './make-card.js';
-import renderCard from './render-card.js';
+import Card from './card.js';
+// import renderCard from './render-card.js';
 
 const FilmCardsNumber = {
   MAIN: 7,
@@ -31,7 +32,7 @@ const renderCardList = (amount, block) => {
   const fragment = document.createDocumentFragment();
   const hasControls = (block === filmsMainBlock) ? true : false;
   for (let i = 0; i < amount; i++) {
-    fragment.appendChild(renderCard(makeCard(), hasControls));
+    const filmCard = new Card(makeCard(), hasControls).render(fragment);
   }
   block.appendChild(fragment);
 };
