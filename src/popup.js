@@ -1,4 +1,4 @@
-import {renderElement, getStringFromArray} from './utils.js';
+import renderElement from './utils.js';
 
 class Popup {
   constructor (data) {
@@ -14,6 +14,7 @@ class Popup {
     this._country = data.country;
     this._duration = data.duration;
     this._releaseDate = data.release.premiereDate;
+    this._element = null;
   }
 
   // Формирует шаблон с данными

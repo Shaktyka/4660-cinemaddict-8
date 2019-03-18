@@ -1,4 +1,4 @@
-import {renderElement, getStringFromArray} from './utils.js';
+import renderElement from './utils.js';
 
 // Класс для отрисовки карточки фильма
 class Card {
@@ -29,7 +29,7 @@ class Card {
         <span class="film-card__genre">${this._genre}</span>
       </p>
       <img src="./images/posters/${this._poster}" alt="${this._title}" class="film-card__poster">
-      <p class="film-card__description">${getStringFromArray(this._description, ` `)}</p>
+      <p class="film-card__description">${this._description.join(` `)}</p>
       <button class="film-card__comments">${this._comments} comments</button>
       ${this._hasControls ? `<form class="film-card__controls"><button class="film-card__controls-item button film-card__controls-item--add-to-watchlist">${this._inWatchlist ? `WL` : `Add to watchlist`}</button><button class="film-card__controls-item button film-card__controls-item--mark-as-watched">${this._isWatched ? `WTCHD` : `Mark as watched`}</button><button class="film-card__controls-item button film-card__controls-item--favorite">${this._isFavorite ? `FAV` : `Mark as favorite`}</button></form>` : ``}
     </article>`.trim();
