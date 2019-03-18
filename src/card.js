@@ -35,17 +35,12 @@ class Card {
     </article>`.trim();
   }
 
-  // Формирует элемент и добавляет его в контейнер
-  render(container) {
-    if (this._element) {
-      container.removeChild(this._element);
-      this._element = null;
-    }
-
+  // Возвращает DOM-элемент
+  render() {
     this._element = renderElement(this.template);
-    container.appendChild(this._element);
+    return this._element;
 
-    // здесь же должны устанавл-ся обраб-ки событий
+    // здесь же должны устанавл-ся обраб-ки событий?
   }
 
   unrender() {

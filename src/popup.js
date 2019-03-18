@@ -188,16 +188,10 @@ class Popup {
     </section>`.trim();
   }
 
-  // Формирует элемент и добавляет его в контейнер
-  render(container) {
-    if (this._element) {
-      container.removeChild(this._element);
-      this._element = null;
-    }
-
+  // Возвращает элемент
+  render() {
     this._element = renderElement(this.template);
-    container.appendChild(this._element);
-
+    return this._element;
     // здесь же должны устанавл-ся обраб-ки событий
   }
 
