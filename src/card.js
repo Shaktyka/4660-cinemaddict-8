@@ -16,6 +16,7 @@ class Card {
     this._isFavorite = data.isFavorite;
     this._element = null;
     this._hasControls = hasControls;
+    this.onCommentsButtonClick = this.onCommentsButtonClick.bind(this);
   }
 
   // Формирует шаблон с данными
@@ -39,16 +40,24 @@ class Card {
   render() {
     this._element = renderElement(this.template);
     return this._element;
-
     // здесь же должны устанавл-ся обраб-ки событий?
+  }
+
+  onCommentsButtonClick(evt) {
+    evt.preventDefault();
+    //
   }
 
   unrender() {
     //
   }
 
-  bind() {
+  onClick() {
     //
+  }
+
+  bind() {
+    this._element.querySelector(`.film-card__comments`).addEventListener(`click`, this.onCommentsButtonClick);
   }
 
   unbind() {
