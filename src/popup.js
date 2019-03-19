@@ -15,6 +15,20 @@ class Popup {
     this._duration = data.duration;
     this._releaseDate = data.release.premiereDate;
     this._element = null;
+
+    this._onClick = null;
+  }
+
+  _onCloseButtonClick() {
+    typeof this._onClick === `function` && this._onClick();
+  }
+
+  get element() {
+    return this._element;
+  }
+
+  set onClick(fn) {
+    this._onClick = fn;
   }
 
   // Формирует шаблон с данными
@@ -26,7 +40,7 @@ class Popup {
         </div>
         <div class="film-details__info-wrap">
           <div class="film-details__poster">
-            <img class="film-details__poster-img" src="${this._poster}" alt="${this._title}">
+            <img class="film-details__poster-img" src="./images/posters/${this._poster}" alt="${this._title}">
 
             <p class="film-details__age">${this._ageRating}</p>
           </div>
@@ -191,16 +205,17 @@ class Popup {
   // Возвращает элемент
   render() {
     this._element = renderElement(this.template);
+    this.bind();
     return this._element;
-    // здесь же должны устанавл-ся обраб-ки событий
   }
 
   unrender() {
-    //
+    this.unbind();
+    this._element = null;
   }
 
   bind() {
-    //
+    this._element.querySelector(`.film-details__close-btn`).addEventListener(`click`, this._onCloseButtonClick.bind(this));
   }
 
   unbind() {

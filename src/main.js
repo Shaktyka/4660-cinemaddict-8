@@ -3,6 +3,7 @@ import renderFilter from './render-filter.js';
 import renderStatsElement from './render-stats-element.js';
 import makeCard from './make-card.js';
 import Card from './card.js';
+import Popup from './popup.js';
 
 const FilmCardsNumber = {
   MAIN: 7,
@@ -34,7 +35,9 @@ const renderCardList = (amount, block) => {
     const filmCard = new Card(makeCard(), hasControls);
 
     filmCard.onClick = () => {
-      // нужный код
+      const filmPopup = new Popup(makeCard()).render();
+      console.log(filmPopup);
+      document.querySelector('body').appendChild(filmPopup);
     };
 
     fragment.appendChild(filmCard.render());
