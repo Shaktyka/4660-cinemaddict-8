@@ -1,7 +1,7 @@
 import renderElement from './utils.js';
 
 class Popup {
-  constructor (data) {
+  constructor(data) {
     this._poster = data.poster;
     this._title = data.filmTitle.release;
     this._titleOriginal = data.filmTitle.original;

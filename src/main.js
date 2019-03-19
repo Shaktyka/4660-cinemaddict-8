@@ -31,7 +31,13 @@ const renderCardList = (amount, block) => {
   const fragment = document.createDocumentFragment();
   const hasControls = block === filmsMainBlock;
   for (let i = 0; i < amount; i++) {
-    fragment.appendChild(new Card(makeCard(), hasControls).render());
+    const filmCard = new Card(makeCard(), hasControls).render();
+
+    filmCard.onClick = () => {
+      console.log(`click!`);
+    };
+
+    fragment.appendChild(filmCard);
   }
   block.appendChild(fragment);
 };
