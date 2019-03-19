@@ -57,7 +57,8 @@ class Card {
   }
 
   unrender() {
-    //
+    this.unbind();
+    this._element = null;
   }
 
   bind() {
@@ -65,7 +66,7 @@ class Card {
   }
 
   unbind() {
-    //
+    // Удаление обработчиков
   }
 
 }
