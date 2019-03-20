@@ -25,7 +25,7 @@ class Popup {
     this._duration = data.duration;
     this._description = (data.description).join(` `);
     this._releaseDate = getCalendarDate(data.release.premiereDate); // поправить
-    this._genres = (data.genres).join(`, `);
+    this._genres = data.genres;
     this._element = null;
 
     this._onClick = null;
@@ -98,17 +98,12 @@ class Popup {
               <tr class="film-details__row">
                 <td class="film-details__term">Genres</td>
                 <td class="film-details__cell">
-                  <span class="film-details__genre">Animation</span>
-                  <span class="film-details__genre">Action</span>
-                  <span class="film-details__genre">Adventure</span>
+                  ${this._genres.map((genre) => (`<span class="film-details__genre">${genre}</span>`.trim())).join('')}
                 </td>
               </tr>
             </table>
 
-            <p class="film-details__film-description">
-              The Incredibles hero family takes on a new mission, which involves a change in family roles:
-              Bob Parr (Mr Incredible) must manage the house while his wife Helen (Elastigirl) goes out to save the world.
-            </p>
+            <p class="film-details__film-description">${this._description}</p>
           </div>
         </div>
 
