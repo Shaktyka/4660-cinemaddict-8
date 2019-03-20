@@ -183,7 +183,7 @@ const makeCard = () => {
     ageRating: ageRating[getRandomNumber(0, ageRating.length - 1)],
     rating: {
       average: getRating(0, 10),
-      user: getRating(0, 10)
+      user: getRandomNumber(1, 9)
     },
     country: filmCountries[getRandomNumber(0, filmCountries.length - 1)],
     poster: filmPosters[getRandomNumber(0, filmPosters.length - 1)],

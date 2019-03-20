@@ -34,10 +34,11 @@ const renderCardList = (amount, block) => {
   const fragment = document.createDocumentFragment();
   const hasControls = block === filmsMainBlock;
   for (let i = 0; i < amount; i++) {
-    const filmCard = new Card(makeCard(), hasControls);
+    const cardData = makeCard();
+    const filmCard = new Card(cardData, hasControls);
 
     filmCard.onClick = () => {
-      const filmPopup = new Popup(makeCard());
+      const filmPopup = new Popup(cardData);
       filmPopup.onClick = () => {
         document.querySelector('body').removeChild(filmPopup);
       };

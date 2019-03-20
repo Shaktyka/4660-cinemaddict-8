@@ -24,8 +24,14 @@ class Popup {
     this._country = data.country;
     this._duration = data.duration;
     this._description = (data.description).join(` `);
+    this._comments = data.comments;
     this._releaseDate = getCalendarDate(data.release.premiereDate); // поправить
     this._genres = data.genres;
+
+    this._inWatchlist = data.inWatchlist;
+    this._isWatched = data.isWatched;
+    this._isFavorite = data.isFavorite;
+
     this._element = null;
 
     this._onClick = null;
@@ -108,22 +114,22 @@ class Popup {
         </div>
 
         <section class="film-details__controls">
-          <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist">
+          <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist" ${this._inWatchlist ? `checked` : ``}>
           <label for="watchlist" class="film-details__control-label film-details__control-label--watchlist">Add to watchlist</label>
 
-          <input type="checkbox" class="film-details__control-input visually-hidden" id="watched" name="watched" checked>
+          <input type="checkbox" class="film-details__control-input visually-hidden" id="watched" name="watched" ${this._isWatched ? `checked` : ``}>
           <label for="watched" class="film-details__control-label film-details__control-label--watched">Already watched</label>
 
-          <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite">
+          <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite" ${this._isFavorite ? `checked` : ``}>
           <label for="favorite" class="film-details__control-label film-details__control-label--favorite">Add to favorites</label>
         </section>
 
         <section class="film-details__comments-wrap">
-          <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">1</span></h3>
+          <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${this._comments}</span></h3>
 
           <ul class="film-details__comments-list">
             <li class="film-details__comment">
-              <span class="film-details__comment-emoji">😴</span>
+              <span class="film-details__comment-emoji">😀</span>
               <div>
                 <p class="film-details__comment-text">So long-long story, boring!</p>
                 <p class="film-details__comment-info">
