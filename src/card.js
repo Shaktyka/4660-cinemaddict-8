@@ -7,7 +7,7 @@ class Card {
     this._avgRating = data.rating.average;
     this._year = new Date(data.release.premiereDate).getFullYear();
     this._duration = data.duration;
-    this._genre = data.genre;
+    this._genres = data.genres;
     this._poster = data.poster;
     this._description = data.description;
     this._comments = data.comments;
@@ -40,7 +40,7 @@ class Card {
       <p class="film-card__info">
         <span class="film-card__year">${this._year}</span>
         <span class="film-card__duration">${this._duration}</span>
-        <span class="film-card__genre">${this._genre}</span>
+        <span class="film-card__genre">${this._genres}</span>
       </p>
       <img src="./images/posters/${this._poster}" alt="${this._title}" class="film-card__poster">
       <p class="film-card__description">${this._description.join(` `)}</p>

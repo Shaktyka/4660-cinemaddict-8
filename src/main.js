@@ -26,6 +26,8 @@ const changeActiveFilterClass = (clickedFilter) => {
   clickedFilter.classList.add(`main-navigation__item--active`);
 };
 
+let openedPopup = null;
+
 // Отрисовка списка задач
 const renderCardList = (amount, block) => {
   block.innerHTML = ``;
@@ -35,9 +37,11 @@ const renderCardList = (amount, block) => {
     const filmCard = new Card(makeCard(), hasControls);
 
     filmCard.onClick = () => {
-      const filmPopup = new Popup(makeCard()).render();
-      console.log(filmPopup);
-      document.querySelector('body').appendChild(filmPopup);
+      const filmPopup = new Popup(makeCard());
+      filmPopup.onClick = () => {
+        document.querySelector('body').removeChild(filmPopup);
+      };
+      document.querySelector('body').appendChild(filmPopup.render());
     };
 
     fragment.appendChild(filmCard.render());

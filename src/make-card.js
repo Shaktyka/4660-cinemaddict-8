@@ -186,7 +186,7 @@ const makeCard = () => {
     description: getElementsFromArray(descriptionFrases, getRandomNumber(1, 3)),
     duration: formatTime(getRandomNumber(60, 200)),
     seasons: getRandomNumber(0, 10),
-    genre: filmGenres[getRandomNumber(0, filmGenres.length - 1)],
+    genres: filmGenres[getRandomNumber(0, filmGenres.length - 1)],
     ageRating: ageRating[getRandomNumber(0, ageRating.length - 1)],
     rating: {
       average: getRating(0, 10),
