@@ -1,5 +1,14 @@
 import renderElement from './utils.js';
 
+// Массив, из которого будет браться название месяца
+const months = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
+
+// формат вывода даты релиза: 15 June 2018
+const getCalendarDate = (date) => {
+  const gotDate = new Date(date);
+  return `${gotDate.getDate()} ${months[gotDate.getMonth() - 1]} ${gotDate.getFullYear()}`;
+};
+
 class Popup {
   constructor(data) {
     console.log(data);
@@ -14,8 +23,9 @@ class Popup {
     this._actors = (data.actors).join(`, `);
     this._country = data.country;
     this._duration = data.duration;
-    this._releaseDate = data.release.premiereDate;
-    this._genres = data.genres;
+    this._description = (data.description).join(` `);
+    this._releaseDate = getCalendarDate(data.release.premiereDate); // поправить
+    this._genres = (data.genres).join(`, `);
     this._element = null;
 
     this._onClick = null;
@@ -76,7 +86,6 @@ class Popup {
               <tr class="film-details__row">
                 <td class="film-details__term">Release Date</td>
                 <td class="film-details__cell">${this._releaseDate} (${this._country})</td>
-                <!-- формат вывода: 15 June 2018 -->
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Runtime</td>

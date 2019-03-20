@@ -1,4 +1,4 @@
-import renderElement from './utils.js';
+import {formatTime, renderElement} from './utils.js';
 
 // Класс для отрисовки карточки фильма
 class Card {
@@ -6,8 +6,8 @@ class Card {
     this._title = data.filmTitle.release;
     this._avgRating = data.rating.average;
     this._year = new Date(data.release.premiereDate).getFullYear();
-    this._duration = data.duration;
-    this._genres = data.genres;
+    this._duration = formatTime(data.duration);
+    this._genres = (data.genres).join(`, `);
     this._poster = data.poster;
     this._description = data.description;
     this._comments = data.comments;

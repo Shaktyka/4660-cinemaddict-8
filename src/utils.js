@@ -8,4 +8,11 @@ export const renderElement = (string) => {
   return template.content;
 };
 
+// Возвращает часы и минуты из переданного кол-ва минут
+export const formatTime = (minutes) => {
+  const hours = Math.round(minutes / 60);
+  const mins = (minutes % 60) ? (minutes % 60 + `m`) : ``;
+  return `${hours}h&nbsp;${mins}`;
+};
+
 export default renderElement;

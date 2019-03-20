@@ -146,13 +146,6 @@ const getRating = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
 // Возвращает рандомную дату в диапазоне
 const getRandomDate = () => Date.now() - getRandomNumber(Milliseconds.ONE_HOUR, Milliseconds.SIXTY_THREE_YEARS);
 
-// Возвращает часы и минуты из переданного кол-ва минут
-const formatTime = (minutes) => {
-  const hours = Math.round(minutes / 60);
-  const mins = (minutes % 60) ? (minutes % 60 + `m`) : ``;
-  return `${hours}h&nbsp;${mins}`;
-};
-
 // Возвращает true или false
 const getBoolean = () => Math.random() >= 0.5;
 
@@ -184,9 +177,9 @@ const makeCard = () => {
     writers: getElementsFromArray(filmWriters, getRandomNumber(1, 3)),
     actors: getElementsFromArray(actorsList, getRandomNumber(1, 5)),
     description: getElementsFromArray(descriptionFrases, getRandomNumber(1, 3)),
-    duration: formatTime(getRandomNumber(60, 200)),
+    duration: getRandomNumber(60, 200),
     seasons: getRandomNumber(0, 10),
-    genres: filmGenres[getRandomNumber(0, filmGenres.length - 1)],
+    genres: getElementsFromArray(filmGenres, getRandomNumber(1, 3)),
     ageRating: ageRating[getRandomNumber(0, ageRating.length - 1)],
     rating: {
       average: getRating(0, 10),
