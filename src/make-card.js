@@ -165,7 +165,7 @@ const getElementsFromArray = (array, num) => shuffleArray(array).slice(0, num);
 // Генерация объекта комментария
 const getCommentObject = () => {
   return {
-    emoji: [`sleeping`, `neutral-face`, `grinning`][Math.floor(Math.random() * 3)],
+    emoji: [`😴`, `😐`, `😀`][Math.floor(Math.random() * 3)],
     comment: [
       `Mandamus abhorreant deseruisse mea at.`,
       `Mea elit deserunt persequeris at.`,

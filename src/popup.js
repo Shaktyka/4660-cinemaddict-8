@@ -9,6 +9,11 @@ const getCalendarDate = (date) => {
   return `${gotDate.getDate()} ${months[gotDate.getMonth() - 1]} ${gotDate.getFullYear()}`;
 };
 
+// Возвращает кол-во дней, прошедших с момента комментария
+const getDaysAgo = (timestamp) => {
+  return Math.floor((new Date() - new Date(timestamp)) / (24 * 1000 * 60 * 60));
+};
+
 class Popup {
   constructor(data) {
     console.log(data);
@@ -135,7 +140,7 @@ class Popup {
                   <p class="film-details__comment-text">${item.comment}</p>
                   <p class="film-details__comment-info">
                     <span class="film-details__comment-author">${item.author}</span>
-                    <span class="film-details__comment-day">${item.date} days ago</span>
+                    <span class="film-details__comment-day">${getDaysAgo(item.date)} days ago</span>
                   </p>
                 </div>
               </li>`.trim())).join(``)}
