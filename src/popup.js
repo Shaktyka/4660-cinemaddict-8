@@ -125,19 +125,21 @@ class Popup {
         </section>
 
         <section class="film-details__comments-wrap">
-          <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${this._comments}</span></h3>
+          <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${this._comments.length}</span></h3>
 
           <ul class="film-details__comments-list">
-            <li class="film-details__comment">
-              <span class="film-details__comment-emoji">😀</span>
-              <div>
-                <p class="film-details__comment-text">So long-long story, boring!</p>
-                <p class="film-details__comment-info">
-                  <span class="film-details__comment-author">Tim Macoveev</span>
-                  <span class="film-details__comment-day">3 days ago</span>
-                </p>
-              </div>
-            </li>
+            ${this._comments.map((item) => (`
+              <li class="film-details__comment">
+                <span class="film-details__comment-emoji">${item.emoji}</span>
+                <div>
+                  <p class="film-details__comment-text">${item.comment}</p>
+                  <p class="film-details__comment-info">
+                    <span class="film-details__comment-author">${item.author}</span>
+                    <span class="film-details__comment-day">${item.date} days ago</span>
+                  </p>
+                </div>
+              </li>`.trim()
+            )).join('')}
           </ul>
 
           <div class="film-details__new-comment">

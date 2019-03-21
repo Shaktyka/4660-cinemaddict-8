@@ -178,12 +178,12 @@ const getCommentObject = () => {
       `In rutrum ac purus sit amet tempus.`
     ].filter(() => [true, false][Math.floor(Math.random() * 2)]).slice(0, getRandomNumber(1, 2)).join(` `),
     author: [
-      `Kate`,
-      `Piter`,
-      `Jack`,
-      `Daniel`,
-      `Diana`,
-      `Garry`][Math.floor(Math.random() * 3)],
+      `Kate Smith`,
+      `Piter Johnson`,
+      `Jack Williams`,
+      `Daniel Jones`,
+      `Diana Brown`,
+      `Garry Davis`][Math.floor(Math.random() * 3)],
     date: getRandomDate(),
   };
 };
