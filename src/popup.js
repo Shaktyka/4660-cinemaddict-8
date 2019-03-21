@@ -9,18 +9,6 @@ const getCalendarDate = (date) => {
   return `${gotDate.getDate()} ${months[gotDate.getMonth() - 1]} ${gotDate.getFullYear()}`;
 };
 
-// Рендеринг списка элементов для рейтинга
-const renderRatingScale = (userScore, scoreBlock) => {
-  console.log(userScore, scoreBlock);
-  const fragment = document.createDocumentFragment();
-  for (let i = 1; i <= 9; i++) {
-    const scaleString = `<input type="radio" name="score" class="film-details__user-rating-input visually-hidden" value="${i}" id="rating-${i}" ${userScore === i ? `checked` : ``}><label class="film-details__user-rating-label" for="rating-${i}">${i}</label>`;
-    const scaleFragment = renderElement(scaleString);
-    fragment.appendChild(scaleFragment);
-  }
-  scoreBlock.appendChild(fragment);
-};
-
 class Popup {
   constructor(data) {
     console.log(data);
@@ -182,11 +170,11 @@ class Popup {
 
           <div class="film-details__user-score">
             <div class="film-details__user-rating-poster">
-              <img src="images/posters/blackmail.jpg" alt="film-poster" class="film-details__user-rating-img">
+              <img src="images/posters/${this._poster}" alt="${this._title}" class="film-details__user-rating-img">
             </div>
 
             <section class="film-details__user-rating-inner">
-              <h3 class="film-details__user-rating-title">Incredibles 2</h3>
+              <h3 class="film-details__user-rating-title">${this._title}</h3>
 
               <p class="film-details__user-rating-feelings">How you feel it?</p>
 

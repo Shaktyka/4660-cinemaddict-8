@@ -162,6 +162,41 @@ const shuffleArray = (array) => {
 // Возвращает х элементов из массива
 const getElementsFromArray = (array, num) => shuffleArray(array).slice(0, num);
 
+// Генерация объекта комментария
+const getCommentObject = () => {
+  return {
+    emoji: [`sleeping`, `neutral-face`, `grinning`][Math.floor(Math.random() * 3)],
+    comment: [
+      `Mandamus abhorreant deseruisse mea at.`,
+      `Mea elit deserunt persequeris at.`,
+      `In putant fuisset honestatis qui.`,
+      `Magna copiosae apeirian ius at.`,
+      `Per cu iracundia splendide.`,
+      `Odio contentiones sed cu.`,
+      `Usu commodo prompta prodesset id.`,
+      `Tation delenit percipitur at vix.`,
+      `In rutrum ac purus sit amet tempus.`
+    ].filter(() => [true, false][Math.floor(Math.random() * 2)]).slice(0, getRandomNumber(1, 2)).join(` `),
+    author: [
+      `Kate`,
+      `Piter`,
+      `Jack`,
+      `Daniel`,
+      `Diana`,
+      `Garry`][Math.floor(Math.random() * 3)],
+    date: getRandomDate(),
+  };
+};
+
+// Генерация массива из Х рандомных комментариев
+const getCommentsArray = (num) => {
+  const commentsArray = [];
+  for (let i = 0; i < num; i++) {
+    commentsArray.push(getCommentObject());
+  }
+  return commentsArray;
+};
+
 // Получаем данные для карточки фильма
 const makeCard = () => {
   return {
@@ -187,7 +222,7 @@ const makeCard = () => {
     },
     country: filmCountries[getRandomNumber(0, filmCountries.length - 1)],
     poster: filmPosters[getRandomNumber(0, filmPosters.length - 1)],
-    comments: getRandomNumber(0, 10),
+    comments: getCommentsArray(getRandomNumber(0, 5)),
     inWatchlist: getBoolean(),
     isWatched: getBoolean(),
     isFavorite: getBoolean()
