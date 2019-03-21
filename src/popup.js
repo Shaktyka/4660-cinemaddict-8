@@ -104,7 +104,7 @@ class Popup {
               <tr class="film-details__row">
                 <td class="film-details__term">Genres</td>
                 <td class="film-details__cell">
-                  ${this._genres.map((genre) => (`<span class="film-details__genre">${genre}</span>`.trim())).join('')}
+                  ${this._genres.map((genre) => (`<span class="film-details__genre">${genre}</span>`.trim())).join(``)}
                 </td>
               </tr>
             </table>
@@ -138,8 +138,7 @@ class Popup {
                     <span class="film-details__comment-day">${item.date} days ago</span>
                   </p>
                 </div>
-              </li>`.trim()
-            )).join('')}
+              </li>`.trim())).join(``)}
           </ul>
 
           <div class="film-details__new-comment">
@@ -181,10 +180,9 @@ class Popup {
               <p class="film-details__user-rating-feelings">How you feel it?</p>
 
               <div class="film-details__user-rating-score">
-                ${[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (`
-                  <input type="radio" name="score" class="film-details__user-rating-input visually-hidden" value="${item}" id="rating-${item}" ${(item === this._userRating) ? `checked` : ``}>
-                  <label class="film-details__user-rating-label" for="rating-${item}">${item}</label>`.trim()
-                )).join('')}
+                ${new Array(9).fill().map((item, index) => (`
+                  <input type="radio" name="score" class="film-details__user-rating-input visually-hidden" value="${index + 1}" id="rating-${index + 1}" ${(index + 1 === +this._userRating) ? `checked` : ``}>
+                  <label class="film-details__user-rating-label" for="rating-${index + 1}">${index + 1}</label>`.trim())).join(``)}
               </div>
             </section>
           </div>

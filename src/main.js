@@ -40,9 +40,9 @@ const renderCardList = (amount, block) => {
     filmCard.onClick = () => {
       const filmPopup = new Popup(cardData);
       filmPopup.onClick = () => {
-        document.querySelector('body').removeChild(filmPopup);
+        document.querySelector(`body`).removeChild(filmPopup);
       };
-      document.querySelector('body').appendChild(filmPopup.render());
+      document.querySelector(`body`).appendChild(filmPopup.render());
     };
 
     fragment.appendChild(filmCard.render());
