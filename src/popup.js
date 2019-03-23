@@ -1,4 +1,4 @@
-import renderElement from './utils.js';
+// import renderElement from './utils.js';
 import Component from './component.js';
 // import moment from 'moment';
 // import 'moment-duration-format';
@@ -215,7 +215,7 @@ class Popup extends Component {
   }
 
   // Выбор эмодзи
-  _onEmojiClick(el) {
+  _onEmojiClick() {
     //
   }
 
