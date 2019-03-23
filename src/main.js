@@ -43,10 +43,10 @@ const renderCardList = (amount, block) => {
         // Чтобы поверх уже открытого попапа не появляся новый
         return false;
       } else {
-        document.body.appendChild(filmPopup.render());
         filmPopup.onPopupClose = () => {
           filmPopup.unrender();
         };
+        document.body.appendChild(filmPopup.render());
       }
     };
     fragment.appendChild(filmCard.render());
