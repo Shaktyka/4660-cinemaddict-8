@@ -207,7 +207,7 @@ class Popup {
   unrender() {
     if (this._element) {
       this.unbind();
-      this._element.parentNode.removeChild(this._element);
+      document.body.removeChild(document.querySelector(`.film-details`));
       this._element = null;
     }
   }
@@ -217,7 +217,7 @@ class Popup {
   }
 
   unbind() {
-    this._element.querySelector(`.film-details__close-btn`).removeEventListener(`click`, this._onCloseButtonClick);
+    document.querySelector(`.film-details`).querySelector(`.film-details__close-btn`).removeEventListener(`click`, this._onCloseButtonClick);
   }
 
 }

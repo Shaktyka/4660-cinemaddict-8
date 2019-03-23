@@ -39,10 +39,15 @@ const renderCardList = (amount, block) => {
     const filmPopup = new Popup(cardData);
 
     filmCard.onCommentsClick = () => {
-      document.body.appendChild(filmPopup.render());
-      filmPopup.onPopupClose = () => {
-        filmPopup.unrender();
-      };
+      if (document.body.querySelector(`.film-details`)) {
+        // Чтобы поверх уже открытого попапа не появляся новый
+        return false;
+      } else {
+        document.body.appendChild(filmPopup.render());
+        filmPopup.onPopupClose = () => {
+          filmPopup.unrender();
+        };
+      }
     };
     fragment.appendChild(filmCard.render());
   }
