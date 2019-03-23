@@ -2,7 +2,6 @@ import renderElement from './utils.js';
 import Component from './component.js';
 // import moment from 'moment';
 // import 'moment-duration-format';
-// moment.locale(`ru`);
 
 // Массив, из которого будет браться название месяца
 const months = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
@@ -43,6 +42,12 @@ class Popup extends Component {
 
     this._onPopupClose = null;
     this._onCloseButtonClick = this._onCloseButtonClick.bind(this);
+
+    this._onCommentAdd = null;
+
+    this._onRatingChange = null;
+    this._onRatingClick = this._onRatingClick.bind(this);
+    this._onEmojiClick = this._onEmojiClick.bind(this);
   }
 
   get template() {
@@ -193,6 +198,25 @@ class Popup extends Component {
 
   set onPopupClose(fn) {
     this._onPopupClose = fn;
+  }
+
+  // Добавление комментария
+  set onCommentAdd(fn) {
+    this._onCommentAdd = fn;
+  }
+
+  _onRatingClick() {
+    //
+  }
+
+  // Изменение рейтинга
+  set onRatingChange(fn) {
+    this._onRatingChange = fn;
+  }
+
+  // Выбор эмодзи
+  _onEmojiClick(el) {
+    //
   }
 
   unrender() {

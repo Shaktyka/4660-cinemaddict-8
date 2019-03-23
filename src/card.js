@@ -2,7 +2,6 @@ import {formatTime, renderElement} from './utils.js';
 import Component from './component.js';
 // import moment from 'moment';
 // import 'moment-duration-format';
-// moment.locale(`ru`);
 
 // Класс для отрисовки карточки фильма
 class Card extends Component {
