@@ -17,19 +17,20 @@ class Card {
     this._element = null;
     this._hasControls = hasControls;
 
-    this._onClick = null;
+    this._onCommentsClick = null;
   }
 
-  _onCommentsButtonClick() {
-    typeof this._onClick === `function` && this._onClick();
+  _onCommentsButtonClick(evt) {
+    evt.preventDefault();
+    return typeof (this._onCommentsClick === `function`) && this._onCommentsClick();
   }
 
   get element() {
     return this._element;
   }
 
-  set onClick(fn) {
-    this._onClick = fn;
+  set onCommentsClick(fn) {
+    this._onCommentsClick = fn;
   }
 
   // Формирует шаблон с данными
@@ -49,16 +50,18 @@ class Card {
     </article>`.trim();
   }
 
-  // Возвращает DOM-элемент
   render() {
+    this.unrender();
     this._element = renderElement(this.template);
     this.bind();
     return this._element;
   }
 
   unrender() {
-    this.unbind();
-    this._element = null;
+    if (this._element) {
+      this.unbind();
+      this._element = null;
+    }
   }
 
   bind() {
@@ -66,7 +69,7 @@ class Card {
   }
 
   unbind() {
-    // Удаление обработчиков
+    this._element.querySelector(`.film-card__comments`).removeEventListener(`click`, this._onCommentsButtonClick.bind(this));
   }
 
 }

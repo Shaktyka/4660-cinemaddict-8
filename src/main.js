@@ -26,7 +26,7 @@ const changeActiveFilterClass = (clickedFilter) => {
   clickedFilter.classList.add(`main-navigation__item--active`);
 };
 
-let openedPopup = null;
+// let openedPopup = null;
 
 // Отрисовка списка задач
 const renderCardList = (amount, block) => {
@@ -36,15 +36,14 @@ const renderCardList = (amount, block) => {
   for (let i = 0; i < amount; i++) {
     const cardData = makeCard();
     const filmCard = new Card(cardData, hasControls);
+    const filmPopup = new Popup(cardData);
 
-    filmCard.onClick = () => {
-      const filmPopup = new Popup(cardData);
-      filmPopup.onClick = () => {
-        document.querySelector(`body`).removeChild(filmPopup);
+    filmCard.onCommentsClick = () => {
+      document.body.appendChild(filmPopup.render());
+      filmPopup.onPopupClose = () => {
+        filmPopup.unrender();
       };
-      document.querySelector(`body`).appendChild(filmPopup.render());
     };
-
     fragment.appendChild(filmCard.render());
   }
   block.appendChild(fragment);

@@ -16,7 +16,6 @@ const getDaysAgo = (timestamp) => {
 
 class Popup {
   constructor(data) {
-    console.log(data);
     this._poster = data.poster;
     this._title = data.filmTitle.release;
     this._titleOriginal = data.filmTitle.original;
@@ -38,20 +37,12 @@ class Popup {
     this._isFavorite = data.isFavorite;
 
     this._element = null;
-
-    this._onClick = null;
-  }
-
-  _onCloseButtonClick() {
-    typeof this._onClick === `function` && this._onClick();
+    this._onPopupClose = null;
+    this._onCloseButtonClick = this._onCloseButtonClick.bind(this);
   }
 
   get element() {
     return this._element;
-  }
-
-  set onClick(fn) {
-    this._onClick = fn;
   }
 
   // Формирует шаблон с данными
@@ -196,16 +187,29 @@ class Popup {
     </section>`.trim();
   }
 
+  _onCloseButtonClick(evt) {
+    evt.preventDefault();
+    return (typeof this._onPopupClose === `function`) && this._onPopupClose();
+  }
+
+  set onPopupClose(fn) {
+    this._onPopupClose = fn;
+  }
+
   // Возвращает элемент
   render() {
+    this.unrender();
     this._element = renderElement(this.template);
     this.bind();
     return this._element;
   }
 
   unrender() {
-    this.unbind();
-    this._element = null;
+    if (this._element) {
+      this.unbind();
+      this._element.parentNode.removeChild(this._element);
+      this._element = null;
+    }
   }
 
   bind() {
@@ -213,7 +217,7 @@ class Popup {
   }
 
   unbind() {
-    //
+    this._element.querySelector(`.film-details__close-btn`).removeEventListener(`click`, this._onCloseButtonClick);
   }
 
 }
