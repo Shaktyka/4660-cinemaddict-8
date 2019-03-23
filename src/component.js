@@ -1,3 +1,5 @@
+import renderElement from './utils.js';
+
 class Component {
   constructor() {
     if (new.target === Component) {
@@ -16,11 +18,9 @@ class Component {
   }
 
   render() {
-    if (this._element) {
-      this._element = renderElement(this.template);
-      this.bind();
-      return this._element;
-    }
+    this._element = renderElement(this.template);
+    this.bind();
+    return this._element;
   }
 
   bind() {};
@@ -33,3 +33,5 @@ class Component {
     this._element = null;
   };
 }
+
+export default Component;

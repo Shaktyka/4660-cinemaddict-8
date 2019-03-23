@@ -1,4 +1,5 @@
 import renderElement from './utils.js';
+import Component from './component.js';
 
 // Массив, из которого будет браться название месяца
 const months = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
@@ -14,8 +15,9 @@ const getDaysAgo = (timestamp) => {
   return Math.floor((new Date() - new Date(timestamp)) / (24 * 1000 * 60 * 60));
 };
 
-class Popup {
+class Popup extends Component {
   constructor(data) {
+    super();
     this._poster = data.poster;
     this._title = data.filmTitle.release;
     this._titleOriginal = data.filmTitle.original;
@@ -36,16 +38,10 @@ class Popup {
     this._isWatched = data.isWatched;
     this._isFavorite = data.isFavorite;
 
-    this._element = null;
     this._onPopupClose = null;
     this._onCloseButtonClick = this._onCloseButtonClick.bind(this);
   }
 
-  get element() {
-    return this._element;
-  }
-
-  // Формирует шаблон с данными
   get template() {
     return `<section class="film-details">
       <form class="film-details__inner" action="" method="get">
@@ -194,14 +190,6 @@ class Popup {
 
   set onPopupClose(fn) {
     this._onPopupClose = fn;
-  }
-
-  // Возвращает элемент
-  render() {
-    this.unrender();
-    this._element = renderElement(this.template);
-    this.bind();
-    return this._element;
   }
 
   unrender() {
