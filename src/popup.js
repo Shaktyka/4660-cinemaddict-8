@@ -33,7 +33,7 @@ class Popup extends Component {
     this._duration = data.duration;
     this._description = (data.description).join(` `);
     this._comments = data.comments;
-    this._releaseDate = getCalendarDate(data.release.premiereDate); // поправить
+    this._releaseDate = getCalendarDate(data.release.premiereDate);
     this._genres = data.genres;
 
     this._inWatchlist = data.inWatchlist;
