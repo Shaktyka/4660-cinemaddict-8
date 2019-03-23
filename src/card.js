@@ -18,6 +18,7 @@ class Card {
     this._hasControls = hasControls;
 
     this._onCommentsClick = null;
+    this._onCommentsButtonClick = this._onCommentsButtonClick.bind(this);
   }
 
   _onCommentsButtonClick(evt) {
@@ -65,11 +66,11 @@ class Card {
   }
 
   bind() {
-    this._element.querySelector(`.film-card__comments`).addEventListener(`click`, this._onCommentsButtonClick.bind(this));
+    this._element.querySelector(`.film-card__comments`).addEventListener(`click`, this._onCommentsButtonClick);
   }
 
   unbind() {
-    this._element.querySelector(`.film-card__comments`).removeEventListener(`click`, this._onCommentsButtonClick.bind(this));
+    this._element.querySelector(`.film-card__comments`).removeEventListener(`click`, this._onCommentsButtonClick);
   }
 
 }
