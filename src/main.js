@@ -26,8 +26,6 @@ const changeActiveFilterClass = (clickedFilter) => {
   clickedFilter.classList.add(`main-navigation__item--active`);
 };
 
-// let openedPopup = null;
-
 // Отрисовка списка задач
 const renderCardList = (amount, block) => {
   block.innerHTML = ``;

@@ -221,17 +221,17 @@ class Popup extends Component {
   unrender() {
     if (this._element) {
       this.unbind();
-      document.body.removeChild(document.querySelector(`.film-details`));
+      document.body.removeChild(this._element);
       this._element = null;
     }
   }
 
   bind() {
-    this._element.querySelector(`.film-details__close-btn`).addEventListener(`click`, this._onCloseButtonClick.bind(this));
+    this._element.querySelector(`.film-details__close-btn`).addEventListener(`click`, this._onCloseButtonClick);
   }
 
   unbind() {
-    document.querySelector(`.film-details`).querySelector(`.film-details__close-btn`).removeEventListener(`click`, this._onCloseButtonClick);
+    this._element.querySelector(`.film-details__close-btn`).removeEventListener(`click`, this._onCloseButtonClick);
   }
 
   updateData(data) {

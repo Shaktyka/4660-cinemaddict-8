@@ -3,9 +3,9 @@ export const getRandomNumber = (min, max) => min + Math.floor(Math.random() * (m
 
 // Генерирует элемент из строки
 export const renderElement = (string) => {
-  const template = document.createElement(`template`);
-  template.innerHTML = string;
-  return template.content;
+  const div = document.createElement(`div`);
+  div.innerHTML = string;
+  return div.firstChild;
 };
 
 // Возвращает часы и минуты из переданного кол-ва минут
