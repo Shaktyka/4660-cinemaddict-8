@@ -33,7 +33,9 @@ class Component {
     this._element = null;
   }
 
-  update() {}
+  update(data) {
+    this._title = data.filmTitle.release;
+  }
 }
 
 export default Component;
