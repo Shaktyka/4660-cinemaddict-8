@@ -37,10 +37,8 @@ const renderCardList = (amount, block) => {
     const filmPopup = new Popup(cardData);
 
     filmCard.onCommentsClick = () => {
-      if (document.body.querySelector(`.film-details`)) {
-        // Чтобы поверх уже открытого попапа не появляся новый
-        return false;
-      } else {
+      // if добавлен, чтобы поверх уже открытого попапа не появляся новый
+      if (!document.body.querySelector(`.film-details`)) {
         filmPopup.onPopupClose = () => {
           filmPopup.unrender();
         };
