@@ -43,9 +43,11 @@ class Popup extends Component {
     this._onCloseButtonClick = this._onCloseButtonClick.bind(this);
 
     this._onCommentAdd = null;
+    this._onCommentKeyDown = this._onCommentKeyDown.bind(this);
 
     this._onRatingChange = null;
     this._onRatingClick = this._onRatingClick.bind(this);
+
     this._onEmojiClick = this._onEmojiClick.bind(this);
   }
 
@@ -190,32 +192,34 @@ class Popup extends Component {
     </section>`.trim();
   }
 
+  set onPopupClose(fn) {
+    this._onPopupClose = fn;
+  }
+
+  set onCommentAdd(fn) {
+    this._onCommentAdd = fn;
+  }
+
+  set onRatingChange(fn) {
+    this._onRatingChange = fn;
+  }
+
   _onCloseButtonClick(evt) {
     evt.preventDefault();
     return (typeof this._onPopupClose === `function`) && this._onPopupClose();
   }
 
-  set onPopupClose(fn) {
-    this._onPopupClose = fn;
-  }
-
-  // Добавление комментария
-  set onCommentAdd(fn) {
-    this._onCommentAdd = fn;
+  _onCommentKeyDown(evt) {
+    evt.preventDefault();
   }
 
   _onRatingClick() {
     //
   }
 
-  // Изменение рейтинга
-  set onRatingChange(fn) {
-    this._onRatingChange = fn;
-  }
-
   // Выбор эмодзи
-  _onEmojiClick() {
-    //
+  _onEmojiClick(item) {
+    this._element.querySelector(`.film-details__add-emoji-label`).textContent = item.target.textContent;
   }
 
   unrender() {
@@ -228,10 +232,12 @@ class Popup extends Component {
 
   bind() {
     this._element.querySelector(`.film-details__close-btn`).addEventListener(`click`, this._onCloseButtonClick);
+    this._element.querySelector(`.film-details__comment-input`).addEventListener(`keydown`, this._onCommentKeyDown);
   }
 
   unbind() {
     this._element.querySelector(`.film-details__close-btn`).removeEventListener(`click`, this._onCloseButtonClick);
+    this._element.querySelector(`.film-details__comment-input`).removeEventListener(`keydown`, this._onCommentKeyDown);
   }
 
   updateData(data) {
