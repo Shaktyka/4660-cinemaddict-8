@@ -42,10 +42,10 @@ const renderCardList = (amount, block) => {
         filmPopup.onPopupClose = () => {
           filmPopup.unrender();
         };
-        document.body.appendChild(filmPopup.render());
+        document.body.appendChild(filmPopup.element);
       }
     };
-    fragment.appendChild(filmCard.render());
+    fragment.appendChild(filmCard.element);
   }
   block.appendChild(fragment);
 };

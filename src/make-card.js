@@ -178,7 +178,7 @@ const getElementsFromArray = (array, num) => shuffleArray(array).slice(0, num);
 const getCommentObject = () => {
   return {
     emoji: [`😴`, `😐`, `😀`][Math.floor(Math.random() * 3)],
-    comment: getElementsFromArray(comments, getRandomNumber(1, 3)),
+    comment: comments[getRandomNumber(0, comments.length - 1)],
     author: [
       `Kate Smith`,
       `Piter Johnson`,

@@ -10,17 +10,17 @@ class Component {
   }
 
   get element() {
+    this.render();
     return this._element;
-  }
-
-  get template() {
-    throw new Error(`You have to define template.`);
   }
 
   render() {
     this._element = renderElement(this.template);
     this.bind();
-    return this._element;
+  }
+
+  get template() {
+    throw new Error(`You have to define template.`);
   }
 
   bind() {}

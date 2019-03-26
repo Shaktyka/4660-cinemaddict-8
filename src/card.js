@@ -25,7 +25,7 @@ class Card extends Component {
 
   _onCommentsButtonClick(evt) {
     evt.preventDefault();
-    return typeof (this._onCommentsClick === `function`) && this._onCommentsClick();
+    return (typeof this._onCommentsClick === `function`) && this._onCommentsClick();
   }
 
   set onCommentsClick(fn) {
@@ -54,6 +54,14 @@ class Card extends Component {
 
   unbind() {
     this._element.querySelector(`.film-card__comments`).removeEventListener(`click`, this._onCommentsButtonClick);
+  }
+
+  update(data) {
+    this._inWatchlist = data.inWatchlist;
+    this._isWatched = data.isWatched;
+    this._isFavorite = data.isFavorite;
+    this._comments = data.comments;
+    this._userRating = data.rating.user;
   }
 
 }
