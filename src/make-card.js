@@ -140,6 +140,18 @@ const descriptionFrases = [
   `In rutrum ac purus sit amet tempus.`
 ];
 
+const comments = [
+  `Mandamus abhorreant deseruisse mea at.`,
+  `Mea elit deserunt persequeris at.`,
+  `In putant fuisset honestatis qui.`,
+  `Magna copiosae apeirian ius at.`,
+  `Per cu iracundia splendide.`,
+  `Odio contentiones sed cu.`,
+  `Usu commodo prompta prodesset id.`,
+  `Tation delenit percipitur at vix.`,
+  `In rutrum ac purus sit amet tempus.`
+];
+
 // Возвращает дробное десятичное число (рейтинг)
 const getRating = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
 
@@ -166,17 +178,7 @@ const getElementsFromArray = (array, num) => shuffleArray(array).slice(0, num);
 const getCommentObject = () => {
   return {
     emoji: [`😴`, `😐`, `😀`][Math.floor(Math.random() * 3)],
-    comment: [
-      `Mandamus abhorreant deseruisse mea at.`,
-      `Mea elit deserunt persequeris at.`,
-      `In putant fuisset honestatis qui.`,
-      `Magna copiosae apeirian ius at.`,
-      `Per cu iracundia splendide.`,
-      `Odio contentiones sed cu.`,
-      `Usu commodo prompta prodesset id.`,
-      `Tation delenit percipitur at vix.`,
-      `In rutrum ac purus sit amet tempus.`
-    ].filter(() => [true, false][Math.floor(Math.random() * 2)]).slice(0, getRandomNumber(1, 2)).join(` `),
+    comment: getElementsFromArray(comments, getRandomNumber(1, 3)),
     author: [
       `Kate Smith`,
       `Piter Johnson`,
