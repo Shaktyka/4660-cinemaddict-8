@@ -25,7 +25,9 @@ class Card extends Component {
 
   _onCommentsButtonClick(evt) {
     evt.preventDefault();
-    return (typeof this._onCommentsClick === `function`) && this._onCommentsClick();
+    if (typeof this._onCommentsClick === `function`) {
+      this._onCommentsClick();
+    }
   }
 
   set onCommentsClick(fn) {

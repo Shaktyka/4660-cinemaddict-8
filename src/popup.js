@@ -192,7 +192,9 @@ class Popup extends Component {
 
   _onCloseButtonClick(evt) {
     evt.preventDefault();
-    return (typeof this._onPopupClose === `function`) && this._onPopupClose();
+    if (typeof this._onPopupClose === `function`) {
+      this._onPopupClose();
+    }
   }
 
   _onCommentKeyDown(evt) {
