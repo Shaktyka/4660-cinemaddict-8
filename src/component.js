@@ -28,9 +28,10 @@ class Component {
   unbind() {}
 
   unrender() {
-    this.unbind();
-    this._element.remove();
-    this._element = null;
+    if (this._element) {
+      this.unbind();
+      this._element = null;
+    }
   }
 
   update(data) {
