@@ -183,7 +183,7 @@ const getCommentObject = () => {
       `Jack Williams`,
       `Daniel Jones`,
       `Diana Brown`,
-      `Garry Davis`][Math.floor(Math.random() * 3)],
+      `Garry Davis`][Math.floor(Math.random() * 6)],
     date: getRandomDate(),
   };
 };

@@ -1,6 +1,6 @@
 import Component from './component.js';
-// import moment from 'moment';
-// import 'moment-duration-format';
+import moment from 'moment';
+import 'moment-duration-format';
 
 // Массив, из которого будет браться название месяца
 const months = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];

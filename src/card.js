@@ -1,7 +1,7 @@
 import {formatTime} from './utils.js';
 import Component from './component.js';
-// import moment from 'moment';
-// import 'moment-duration-format';
+import moment from 'moment';
+import 'moment-duration-format';
 
 // Класс для отрисовки карточки фильма
 class Card extends Component {
