@@ -1,4 +1,3 @@
-import {formatTime} from './utils.js';
 import Component from './component.js';
 import moment from 'moment';
 import 'moment-duration-format';
@@ -9,8 +8,8 @@ class Card extends Component {
     super();
     this._title = data.filmTitle.release;
     this._avgRating = data.rating.average;
-    this._year = new Date(data.release.premiereDate).getFullYear();
-    this._duration = formatTime(data.duration);
+    this._year = data.release.premiereDate;
+    this._duration = data.duration;
     this._genres = (data.genres).join(`, `);
     this._poster = data.poster;
     this._description = data.description;
@@ -38,8 +37,8 @@ class Card extends Component {
       <h3 class="film-card__title">${this._title}</h3>
       <p class="film-card__rating">${this._avgRating}</p>
       <p class="film-card__info">
-        <span class="film-card__year">${this._year}</span>
-        <span class="film-card__duration">${this._duration}</span>
+        <span class="film-card__year">${moment(this._year).year()}</span>
+        <span class="film-card__duration">${moment.duration(this._duration, `minutes`).format(`h[h] mm[min]`)}</span>
         <span class="film-card__genre">${this._genres}</span>
       </p>
       <img src="./images/posters/${this._poster}" alt="${this._title}" class="film-card__poster">

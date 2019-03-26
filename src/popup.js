@@ -2,20 +2,6 @@ import Component from './component.js';
 import moment from 'moment';
 import 'moment-duration-format';
 
-// Массив, из которого будет браться название месяца
-const months = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
-
-// формат вывода даты релиза: 15 June 2018
-const getCalendarDate = (date) => {
-  const gotDate = new Date(date);
-  return `${gotDate.getDate()} ${months[gotDate.getMonth() - 1]} ${gotDate.getFullYear()}`;
-};
-
-// Возвращает кол-во дней, прошедших с момента комментария
-const getDaysAgo = (timestamp) => {
-  return Math.floor((new Date() - new Date(timestamp)) / (24 * 1000 * 60 * 60));
-};
-
 class Popup extends Component {
   constructor(data) {
     super();
@@ -32,7 +18,7 @@ class Popup extends Component {
     this._duration = data.duration;
     this._description = (data.description).join(` `);
     this._comments = data.comments;
-    this._releaseDate = getCalendarDate(data.release.premiereDate);
+    this._releaseDate = data.release.premiereDate;
     this._genres = data.genres;
 
     this._inWatchlist = data.inWatchlist;
@@ -92,11 +78,11 @@ class Popup extends Component {
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Release Date</td>
-                <td class="film-details__cell">${this._releaseDate} (${this._country})</td>
+                <td class="film-details__cell">${moment(this._releaseDate).format(`DD MMMM YYYY`)} (${this._country})</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Runtime</td>
-                <td class="film-details__cell">${this._duration} min</td>
+                <td class="film-details__cell">${moment.duration(this._duration, `minutes`).format(`mm [min]`)}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Country</td>
@@ -136,7 +122,7 @@ class Popup extends Component {
                   <p class="film-details__comment-text">${item.comment}</p>
                   <p class="film-details__comment-info">
                     <span class="film-details__comment-author">${item.author}</span>
-                    <span class="film-details__comment-day">${getDaysAgo(item.date)} days ago</span>
+                    <span class="film-details__comment-day">${moment(item.date).fromNow()}</span>
                   </p>
                 </div>
               </li>`.trim())).join(``)}
@@ -254,7 +240,7 @@ class Popup extends Component {
     this._duration = data.duration;
     this._description = (data.description).join(` `);
     this._comments = data.comments;
-    this._releaseDate = getCalendarDate(data.release.premiereDate);
+    // this._releaseDate = getCalendarDate(data.release.premiereDate);
     this._genres = data.genres;
     this._inWatchlist = data.inWatchlist;
     this._isWatched = data.isWatched;
