@@ -2,6 +2,11 @@ import Component from './component.js';
 import moment from 'moment';
 import 'moment-duration-format';
 
+// const Keycode = {
+//   ESC: 27,
+//   ENTER: 13
+// };
+
 class Popup extends Component {
   constructor(data) {
     super();

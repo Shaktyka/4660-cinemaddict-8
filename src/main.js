@@ -19,6 +19,9 @@ const filmsCommentsBlock = document.querySelector(`.comments-top .films-list__co
 // Активный фильтр
 let activeFilter = null;
 
+// Открытый попап
+let isPopupOpen = false;
+
 // Переключение активного класса
 const changeActiveFilterClass = (clickedFilter) => {
   activeFilter.classList.remove(`main-navigation__item--active`);
@@ -37,12 +40,13 @@ const renderCardList = (amount, block) => {
     const filmPopup = new Popup(cardData);
 
     filmCard.onCommentsClick = () => {
-      // if добавлен, чтобы поверх уже открытого попапа не появляся новый
-      if (!document.body.querySelector(`.film-details`)) {
+      if (!isPopupOpen) {
         filmPopup.onPopupClose = () => {
           filmPopup.unrender();
+          isPopupOpen = false;
         };
         document.body.appendChild(filmPopup.element);
+        isPopupOpen = true;
       }
     };
     fragment.appendChild(filmCard.element);
