@@ -37,14 +37,14 @@ const renderCardList = (amount, block) => {
   for (let i = 0; i < amount; i++) {
     const cardData = makeCard();
     const filmCard = new Card(cardData, hasControls);
+    const filmPopup = new Popup(cardData);
+    filmPopup.onPopupClose = () => {
+      filmPopup.unrender();
+      isPopupOpen = false;
+    };
 
     filmCard.onCommentsClick = () => {
       if (!isPopupOpen) {
-        const filmPopup = new Popup(cardData);
-        filmPopup.onPopupClose = () => {
-          filmPopup.unrender();
-          isPopupOpen = false;
-        };
         document.body.appendChild(filmPopup.element);
         isPopupOpen = true;
       }
