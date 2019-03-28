@@ -251,21 +251,9 @@ class Popup extends Component {
   }
 
   updateData(data) {
-    this._poster = data.poster;
-    this._title = data.filmTitle.release;
-    this._titleOriginal = data.filmTitle.original;
-    this._ageRating = data.ageRating;
     this._avgRating = data.rating.average;
     this._userRating = data.rating.user;
-    this._director = data.director;
-    this._writers = (data.writers).join(`, `);
-    this._actors = (data.actors).join(`, `);
-    this._country = data.country;
-    this._duration = data.duration;
-    this._description = (data.description).join(` `);
     this._comments = data.comments;
-    // this._releaseDate = getCalendarDate(data.release.premiereDate);
-    this._genres = data.genres;
     this._inWatchlist = data.inWatchlist;
     this._isWatched = data.isWatched;
     this._isFavorite = data.isFavorite;

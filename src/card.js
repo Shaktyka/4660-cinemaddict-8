@@ -63,7 +63,7 @@ class Card extends Component {
     this._isWatched = data.isWatched;
     this._isFavorite = data.isFavorite;
     this._comments = data.comments;
-    this._userRating = data.rating.user;
+    this._avgRating = data.rating.average;
   }
 
 }

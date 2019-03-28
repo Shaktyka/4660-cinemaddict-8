@@ -34,9 +34,7 @@ class Component {
     }
   }
 
-  update(data) {
-    this._title = data.filmTitle.release;
-  }
+  update() {}
 }
 
 export default Component;
