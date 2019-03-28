@@ -2,7 +2,8 @@ import filterData from './filter-data.js';
 import renderFilter from './render-filter.js';
 import renderStatsElement from './render-stats-element.js';
 import makeCard from './make-card.js';
-import renderCard from './render-card.js';
+import Card from './card.js';
+import Popup from './popup.js';
 
 const FilmCardsNumber = {
   MAIN: 7,
@@ -18,6 +19,9 @@ const filmsCommentsBlock = document.querySelector(`.comments-top .films-list__co
 // Активный фильтр
 let activeFilter = null;
 
+// Открытый попап
+let isPopupOpen = false;
+
 // Переключение активного класса
 const changeActiveFilterClass = (clickedFilter) => {
   activeFilter.classList.remove(`main-navigation__item--active`);
@@ -29,9 +33,27 @@ const changeActiveFilterClass = (clickedFilter) => {
 const renderCardList = (amount, block) => {
   block.innerHTML = ``;
   const fragment = document.createDocumentFragment();
-  const hasControls = (block === filmsMainBlock) ? true : false;
+  const hasControls = block === filmsMainBlock;
   for (let i = 0; i < amount; i++) {
-    fragment.appendChild(renderCard(makeCard(), hasControls));
+    const cardData = makeCard();
+    const filmCard = new Card(cardData, hasControls);
+    const filmPopup = new Popup(cardData);
+    filmPopup.onPopupClose = () => {
+      filmPopup.unrender();
+      isPopupOpen = false;
+    };
+    filmPopup.onSubmit = () => {
+      //
+    };
+
+    filmCard.onCommentsClick = () => {
+      if (!isPopupOpen) {
+        document.body.appendChild(filmPopup.element);
+        isPopupOpen = true;
+      }
+    };
+
+    fragment.appendChild(filmCard.element);
   }
   block.appendChild(fragment);
 };
@@ -41,10 +63,10 @@ const renderFilterList = (filterArray, block) => {
   const fragment = document.createDocumentFragment();
 
   filterArray.forEach((filterDataObject) => {
-    const filterWithoutCount = filterDataObject.title === `All movies`;
+    const isWithoutCount = filterDataObject.title === `All movies`;
     const isActiveFilter = filterDataObject.title === `All movies`;
 
-    const filter = renderFilter(filterDataObject, filterWithoutCount, isActiveFilter, changeActiveFilterClass, renderCardList, filmsMainBlock);
+    const filter = renderFilter(filterDataObject, isWithoutCount, isActiveFilter, changeActiveFilterClass, renderCardList, filmsMainBlock);
     fragment.appendChild(filter);
   });
 

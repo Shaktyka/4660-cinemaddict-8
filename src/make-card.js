@@ -140,18 +140,23 @@ const descriptionFrases = [
   `In rutrum ac purus sit amet tempus.`
 ];
 
+const comments = [
+  `Mandamus abhorreant deseruisse mea at.`,
+  `Mea elit deserunt persequeris at.`,
+  `In putant fuisset honestatis qui.`,
+  `Magna copiosae apeirian ius at.`,
+  `Per cu iracundia splendide.`,
+  `Odio contentiones sed cu.`,
+  `Usu commodo prompta prodesset id.`,
+  `Tation delenit percipitur at vix.`,
+  `In rutrum ac purus sit amet tempus.`
+];
+
 // Возвращает дробное десятичное число (рейтинг)
 const getRating = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
 
 // Возвращает рандомную дату в диапазоне
 const getRandomDate = () => Date.now() - getRandomNumber(Milliseconds.ONE_HOUR, Milliseconds.SIXTY_THREE_YEARS);
-
-// Возвращает часы и минуты из переданного кол-ва минут
-const formatTime = (minutes) => {
-  const hours = Math.round(minutes / 60);
-  const mins = (minutes % 60) ? (minutes % 60 + `m`) : ``;
-  return `${hours}h&nbsp;${mins}`;
-};
 
 // Возвращает true или false
 const getBoolean = () => Math.random() >= 0.5;
@@ -169,6 +174,31 @@ const shuffleArray = (array) => {
 // Возвращает х элементов из массива
 const getElementsFromArray = (array, num) => shuffleArray(array).slice(0, num);
 
+// Генерация объекта комментария
+const getCommentObject = () => {
+  return {
+    emoji: [`😴`, `😐`, `😀`][Math.floor(Math.random() * 3)],
+    comment: comments[getRandomNumber(0, comments.length - 1)],
+    author: [
+      `Kate Smith`,
+      `Piter Johnson`,
+      `Jack Williams`,
+      `Daniel Jones`,
+      `Diana Brown`,
+      `Garry Davis`][Math.floor(Math.random() * 6)],
+    date: getRandomDate(),
+  };
+};
+
+// Генерация массива из Х рандомных комментариев
+const getCommentsArray = (num) => {
+  const commentsArray = [];
+  for (let i = 0; i < num; i++) {
+    commentsArray.push(getCommentObject());
+  }
+  return commentsArray;
+};
+
 // Получаем данные для карточки фильма
 const makeCard = () => {
   return {
@@ -184,17 +214,17 @@ const makeCard = () => {
     writers: getElementsFromArray(filmWriters, getRandomNumber(1, 3)),
     actors: getElementsFromArray(actorsList, getRandomNumber(1, 5)),
     description: getElementsFromArray(descriptionFrases, getRandomNumber(1, 3)),
-    duration: formatTime(getRandomNumber(60, 200)),
+    duration: getRandomNumber(60, 200),
     seasons: getRandomNumber(0, 10),
-    genre: filmGenres[getRandomNumber(0, filmGenres.length - 1)],
+    genres: getElementsFromArray(filmGenres, getRandomNumber(1, 3)),
     ageRating: ageRating[getRandomNumber(0, ageRating.length - 1)],
     rating: {
       average: getRating(0, 10),
-      user: getRating(0, 10)
+      user: getRandomNumber(1, 9)
     },
     country: filmCountries[getRandomNumber(0, filmCountries.length - 1)],
     poster: filmPosters[getRandomNumber(0, filmPosters.length - 1)],
-    comments: getRandomNumber(0, 10),
+    comments: getCommentsArray(getRandomNumber(0, 5)),
     inWatchlist: getBoolean(),
     isWatched: getBoolean(),
     isFavorite: getBoolean()
