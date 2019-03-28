@@ -2,10 +2,10 @@ import Component from './component.js';
 import moment from 'moment';
 import 'moment-duration-format';
 
-// const Keycode = {
-//   ESC: 27,
-//   ENTER: 13
-// };
+const Keycode = {
+  ESC: 27,
+  ENTER: 13
+};
 
 class Popup extends Component {
   constructor(data) {
@@ -33,6 +33,8 @@ class Popup extends Component {
     this._onPopupClose = null;
     this._onCloseButtonClick = this._onCloseButtonClick.bind(this);
 
+    this._onSubmit = null;
+
     this._onCommentAdd = null;
     this._onCommentKeyDown = this._onCommentKeyDown.bind(this);
 
@@ -40,6 +42,9 @@ class Popup extends Component {
     this._onRatingClick = this._onRatingClick.bind(this);
 
     this._onEmojiClick = this._onEmojiClick.bind(this);
+
+    this._onPopupEscPress = this._onPopupEscPress.bind(this);
+    this._onDocumentCtrlEnterPress = this._onDocumentCtrlEnterPress.bind(this);
   }
 
   get template() {
@@ -199,10 +204,52 @@ class Popup extends Component {
     this._onRatingChange = fn;
   }
 
+  set onSubmit(fn) {
+    this._onSubmit = fn;
+  }
+
   _onCloseButtonClick(evt) {
     evt.preventDefault();
     if (typeof this._onPopupClose === `function`) {
       this._onPopupClose();
+    }
+  }
+
+  _onPopupEscPress(evt) {
+    if (evt.keyCode === Keycode.ESC && typeof this._onPopupClose === `function`) {
+      this._onPopupClose();
+    }
+  }
+
+  _processForm(formData) {
+    const entry = {
+      isWatchlist: this._inWatchlist,
+      isWatched: this._isWatched,
+      isFavorite: this._isFavorite,
+      // comments: this._comments,
+      // rating: ``,
+    };
+
+    const cardPopupMapper = Popup.createMapper(entry);
+
+    for (const pair of formData.entries()) {
+      const [property, value] = pair;
+      if (cardPopupMapper[property]) {
+        cardPopupMapper[property](value);
+      }
+    }
+
+    return entry;
+  }
+
+  _onDocumentCtrlEnterPress(evt) {
+    if (evt.ctrlKey && evt.keyCode === Keycode.ENTER) {
+      const formData = new FormData(this._element.querySelector(`.film-details__inner`));
+      const newData = this._processForm(formData);
+      if (typeof this._onSubmit === `function`) {
+        this._onSubmit(newData);
+      }
+      this.update(newData);
     }
   }
 
@@ -236,18 +283,21 @@ class Popup extends Component {
     this._element.querySelectorAll(`.film-details__emoji-label`).forEach((it) => {
       it.addEventListener(`click`, this._onEmojiClick);
     });
+    document.addEventListener(`keydown`, this._onPopupEscPress);
+    document.addEventListener(`keydown`, this._onDocumentCtrlEnterPress);
   }
 
   unbind() {
     this._element.querySelector(`.film-details__close-btn`).removeEventListener(`click`, this._onCloseButtonClick);
     this._element.querySelector(`.film-details__comment-input`).removeEventListener(`keydown`, this._onCommentKeyDown);
-    this._element.querySelector(`.film-details__user-rating-score`).removeEventListener(`click`, this._onRatingClick);
     this._element.querySelectorAll(`.film-details__user-rating-input`).forEach((it) => {
       it.removeEventListener(`click`, this._onRatingClick);
     });
     this._element.querySelectorAll(`.film-details__emoji-label`).forEach((it) => {
       it.removeEventListener(`click`, this._onEmojiClick);
     });
+    document.removeEventListener(`keydown`, this._onPopupEscPress);
+    document.removeEventListener(`keydown`, this._onDocumentCtrlEnterPress);
   }
 
   updateData(data) {

@@ -42,6 +42,9 @@ const renderCardList = (amount, block) => {
       filmPopup.unrender();
       isPopupOpen = false;
     };
+    filmPopup.onSubmit = () => {
+      //
+    };
 
     filmCard.onCommentsClick = () => {
       if (!isPopupOpen) {
