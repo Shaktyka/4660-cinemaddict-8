@@ -309,6 +309,14 @@ class Popup extends Component {
     this._isFavorite = data.isFavorite;
   }
 
+  // Преобразование данных из одного вида в другой
+  // static createMapper(target) {
+  //   return {
+  //     //
+  //   }
+  // }
+
+
 }
 
 export default Popup;
