@@ -253,8 +253,8 @@ class Popup extends Component {
     }
   }
 
-  _onCommentKeyDown(evt) {
-    evt.preventDefault();
+  _onCommentKeyDown() {
+    //
   }
 
   _onRatingClick() {
