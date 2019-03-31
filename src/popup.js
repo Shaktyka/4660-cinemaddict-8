@@ -210,23 +210,23 @@ class Popup extends Component {
     }
   }
 
-  _processForm(formData) {
+  _processForm() {
     const entry = {
-      isWatchlist: this._inWatchlist,
-      isWatched: this._isWatched,
-      isFavorite: this._isFavorite,
-      // comments: this._comments,
-      // rating: ``,
+      inWatchlist: Math.random() >= 0.5,
+      isWatched: Math.random() >= 0.5,
+      isFavorite: Math.random() >= 0.5,
+      comments: [`Comment 1`, `Comment 2`, `Comment 3`],
+      rating: 7,
     };
 
-    const cardPopupMapper = Popup.createMapper(entry);
+    // const cardPopupMapper = Popup.createMapper(entry);
 
-    for (const pair of formData.entries()) {
-      const [property, value] = pair;
-      if (cardPopupMapper[property]) {
-        cardPopupMapper[property](value);
-      }
-    }
+    // for (const pair of formData.entries()) {
+    //   const [property, value] = pair;
+    //   if (cardPopupMapper[property]) {
+    //     cardPopupMapper[property](value);
+    //   }
+    // }
 
     return entry;
   }
@@ -269,7 +269,7 @@ class Popup extends Component {
       it.addEventListener(`click`, this._onEmojiClick);
     });
     document.addEventListener(`keydown`, this._onPopupEscPress);
-    document.addEventListener(`keydown`, this._onDocumentCtrlEnterPress);
+    document.addEventListener(`keydown`, this._onCommentSend);
   }
 
   unbind() {
@@ -282,24 +282,28 @@ class Popup extends Component {
       it.removeEventListener(`click`, this._onEmojiClick);
     });
     document.removeEventListener(`keydown`, this._onPopupEscPress);
-    document.removeEventListener(`keydown`, this._onDocumentCtrlEnterPress);
+    document.removeEventListener(`keydown`, this._onCommentSend);
   }
 
-  updateData(data) {
-    this._avgRating = data.rating.average;
-    this._userRating = data.rating.user;
-    this._comments = data.comments;
+  update(data) {
     this._inWatchlist = data.inWatchlist;
     this._isWatched = data.isWatched;
     this._isFavorite = data.isFavorite;
+    this._userRating = data.rating.user;
+    this._comments = data.comments;
   }
 
   // Преобразование данных из одного вида в другой
-  // static createMapper(target) {
-  //   return {
-  //     //
-  //   }
-  // }
+  static createMapper(target) {
+    return {
+      watchlist: (value) => (target.inWatchlist = value),
+      watched: (value) => (target.isWatched = value),
+      favorite: (value) => (target.isFavorite = value),
+      // comment-emoji: (value) => target. = value,
+      comment: (value) => (target.comments = value),
+      score: (value) => (target.ratinr.user = value)
+    };
+  }
 
 
 }
