@@ -32,19 +32,16 @@ class Popup extends Component {
 
     this._onPopupClose = null;
     this._onCloseButtonClick = this._onCloseButtonClick.bind(this);
+    this._onPopupEscPress = this._onPopupEscPress.bind(this);
 
     this._onSubmit = null;
-
-    this._onCommentAdd = null;
-    this._onCommentKeyDown = this._onCommentKeyDown.bind(this);
+    this._onCommentSend = this._onCommentSend.bind(this);
+    // this._onDocumentCtrlEnterPress = this._onDocumentCtrlEnterPress.bind(this);
 
     this._onRatingChange = null;
     this._onRatingClick = this._onRatingClick.bind(this);
 
     this._onEmojiClick = this._onEmojiClick.bind(this);
-
-    this._onPopupEscPress = this._onPopupEscPress.bind(this);
-    this._onDocumentCtrlEnterPress = this._onDocumentCtrlEnterPress.bind(this);
   }
 
   get template() {
@@ -192,14 +189,6 @@ class Popup extends Component {
     this._onPopupClose = fn;
   }
 
-  set onCommentAdd(fn) {
-    this._onCommentAdd = fn;
-  }
-
-  set onRatingChange(fn) {
-    this._onRatingChange = fn;
-  }
-
   set onRatingChange(fn) {
     this._onRatingChange = fn;
   }
@@ -242,7 +231,7 @@ class Popup extends Component {
     return entry;
   }
 
-  _onDocumentCtrlEnterPress(evt) {
+  _onCommentSend(evt) {
     if (evt.ctrlKey && evt.keyCode === Keycode.ENTER) {
       const formData = new FormData(this._element.querySelector(`.film-details__inner`));
       const newData = this._processForm(formData);
@@ -251,10 +240,6 @@ class Popup extends Component {
       }
       this.update(newData);
     }
-  }
-
-  _onCommentKeyDown() {
-    //
   }
 
   _onRatingClick() {
